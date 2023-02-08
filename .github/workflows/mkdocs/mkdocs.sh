@@ -20,8 +20,10 @@ set -e
 REMOTE="https://@github.com/${GITHUB_REPOSITORY}"
 git remote set-url origin ${REMOTE}
 
+echo "START pip install requirements.txt..."
 pip install -r .github/workflows/mkdocs/requirements.txt
 
-echo "START deploying docs to GitHub pages..."
+echo "Deploying docs to GitHub pages..."
 mkdocs gh-deploy --force
+
 echo "DONE deploying docs to GitHub pages."
