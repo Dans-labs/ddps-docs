@@ -1,8 +1,8 @@
 site_name: DICE Digital Preservation Service
-site_url: https://example.com/
+# site_url: https://example.com/
 
-repo_name: DICE/DDPS
-repo_url: https://github.com/DANS-KNAW/dans-datastation-architecture
+repo_name: DICE Digital Preservation Service
+repo_url: https://github.com/Dans-labs/ddps-docs
 
 theme:
   name: readthedocs
@@ -18,21 +18,10 @@ nav:
   - Components: components.md
   - Open Standards: standards.md
 
-#nav:
-#    - Home: 'index.md'
-#    - 'User Guide':
-#        - 'Writing your docs': 'writing-your-docs.md'
-#        - 'Styling your docs': 'styling-your-docs.md'
-#    - About:
-#        - 'License': 'license.md'
-#        - 'Release Notes': 'release-notes.md'
-
 plugins:
     - search
     - markdownextradata: {}
 
 extra:
-  customer:
-    name: Your name here
-    web: www.example.com
-    salt: salt.example.com
+  api:
+    ldn-inbox: https://github.com/ekoi/ldn-inbox-service
