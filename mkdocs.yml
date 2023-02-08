@@ -1,0 +1,38 @@
+site_name: DICE Digital Preservation Service
+site_url: https://example.com/
+
+repo_name: DICE/DDPS
+repo_url: https://github.com/DANS-KNAW/dans-datastation-architecture
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - json
+
+include_homepage_in_sidebar: false
+
+nav:
+  - Architecture overview: index.md
+  - Introduction: intro.md
+  - Components: components.md
+  - Open Standards: standards.md
+
+#nav:
+#    - Home: 'index.md'
+#    - 'User Guide':
+#        - 'Writing your docs': 'writing-your-docs.md'
+#        - 'Styling your docs': 'styling-your-docs.md'
+#    - About:
+#        - 'License': 'license.md'
+#        - 'Release Notes': 'release-notes.md'
+
+plugins:
+    - search
+    - markdownextradata: {}
+
+extra:
+  customer:
+    name: Your name here
+    web: www.example.com
+    salt: salt.example.com
