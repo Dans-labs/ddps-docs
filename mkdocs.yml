@@ -4,24 +4,44 @@ site_name: DICE Digital Preservation Service
 repo_name: DICE Digital Preservation Service
 repo_url: https://github.com/Dans-labs/ddps-docs
 
+dev_addr: "127.0.0.1:8080"
+
 theme:
   name: readthedocs
   highlightjs: true
   hljs_languages:
     - json
 
+markdown_extensions:
+  - admonition
+  - attr_list
+
 include_homepage_in_sidebar: false
 
 nav:
-  - Architecture overview: index.md
+  - Project overview: index.md
   - Introduction: intro.md
   - Components: components.md
   - Open Standards: standards.md
 
+#nav:
+#    - Home: 'index.md'
+#    - 'User Guide':
+#        - 'Writing your docs': 'writing-your-docs.md'
+#        - 'Styling your docs': 'styling-your-docs.md'
+#    - About:
+#        - 'License': 'license.md'
+#        - 'Release Notes': 'release-notes.md'
+
 plugins:
     - search
     - markdownextradata: {}
+    - mermaid2
 
 extra:
-  api:
-    ldn-inbox: https://github.com/ekoi/ldn-inbox-service
+  hyperlink:
+    ext:
+      dice: https://www.dice-eosc.eu/
+    api:
+      ldn-inbox: https://github.com/ekoi/ldn-inbox-service
+

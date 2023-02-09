@@ -1,8 +1,31 @@
-DICE Digital Preservation Service Architecture
+DICE Digital Preservation Service (DDPS)
 ==============================
 
-Overview
+!!! warning "Work In Progress"
+
+    This document is currently **under development**, which means **"Work in Progress"**. It is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC),
+    funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.
+
+
+Introduction
 --------
+This document describes the functional and technical requirements for the DICE Digital Preservation Service (DDPS).  
+The document is meant as a guide on how to implement the Long Term Preservation Service between a short to mid term data repository and a long term preservation (LTP) Archive.
+All the open web standards used and the specifications and the profiles will be documented here.
+
+DICE Digital Preservation Service
+---------------------------------
+The technical specification for long-term-archiving notifications have been developed by DICE Task 4.3: Long Term Preservation.<p />
+It will focus on the following web standards:  
+
+- [Linked Data Notification](https://www.w3.org/TR/ldn/){target=_blank} (W3C) => Notification protocol
+- [Activity Streams 2](https://www.w3.org/TR/activitystreams-core/){target=_blank} (W3C) => [Vocabulary](https://www.w3.org/TR/activitystreams-vocabulary){target=_blank} / Contents (payload)
+- [Signposting]{target=_blank} => Navigational
+
+[DICE Digital Preservation Service Technical Requirements](tech-requirements.md) 
+
+
+
 This document gives an overview of the DICE Digital Preservation Service (DDPS) architecture. The schema below displays all the components of the service and how they relate and interact to
 each other. The notation used is not a formal one and is intended to be self-explanatory.
 
@@ -24,49 +47,7 @@ Components
 ----------
 Please see the [Service components](components.md) for further details.
 
-
-```python
-def fn():
-    pass
-```
-```json
-{
-  "@context": [
-"https://www.w3.org/ns/activitystreams",
-"https://purl.org/dice/ltp"
-  ],
-  "actor": {
-"id": "https://b2share/",
-"name": "Some repo",
-"type": ""
-  },
-  "id": "urn:uuid:0370c0fb-bb78-4a9b-87f5-bed307a509dd",
-  "object": {
-"id": "https://research-organisation.org/repository/dataset/201203/421/",
-"ietf:cite-as": "https://doi.org/10.5555/12345680",
-"type": "sorg:AboutPage",
-"url": {
-  "id": "https://research-organisation.org/repository/dataset/201203/421/content.pdf",
-  "media-type": "application/pdf",
-  "type": [
-    "Dataset",
-    "sorg:ScholarlyObject"
-  ]
-}
-  },
-  "origin": {
-"id": "https://research-organisation.org/repository",
-"inbox": "https://research-organisation.org/repository/inbox/",
-"type": "Service"
-  },
-  "target": {
-"id": "https://sample.com/system",
-"inbox": "https://sample.com/system/inbox/",
-"type": "Service"
-  },
-  "type": [
-"Offer",
-"ddps:ReviewAction"
-  ]
-}
-```
+[yEd]: https://www.yworks.com/products/yed
+[Signposting]: https://www.signposting.org/
+[//]: # ([DICE project]: https://www.dice-eosc.eu/)
+[DICE project]: {{ hyperlink.ext.dice }}
