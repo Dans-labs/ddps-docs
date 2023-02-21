@@ -19,14 +19,17 @@ It will use the following open web standards:
 ## Namespaces
 Within this document, the following namespace prefix bindings are used:
 
-| Prefix 		   | Namespace  |
-|:------------|:---------------|
-| `as`     		   | https://www.w3.org/ns/activitystreams# |
-| `ldp`	        |http://www.w3.org/ns/ldp# |
-| `ddps`        | http://some.example.org/ns/ddps# |
-| `so`          | https://schema.org/|
+| Prefix 	 | Namespace                              | Name                                      |
+|:---------|:---------------------------------------|:------------------------------------------|
+| `as`     | https://www.w3.org/ns/activitystreams# | W3C ActivityStreams 2.0                   |
+| `ldp`    | http://www.w3.org/ns/ldp#              | W3C Linked Data Platform (LDP) Vocabulary |
+| `ddps`   | http://some.example.org/ns/ddps#       | DICE Digital Preservation Service         |
+| `so`     | https://schema.org/                    | Schema.org                                |
 
-Examples of notification payloads use [JSON-LD] as syntax.  
+Examples of notification payloads use [JSON-LD] as syntax.
+In our example LDN+AS2 payloads we use [JSON-LD] as syntax. In these examples we don’t explicity write the prefixes.
+The @context element in JSON-LD defines a mapping from the terms to [URI]-s.
+
 
 
 ## Use cases

@@ -15,14 +15,22 @@ theme:
 markdown_extensions:
   - admonition
   - attr_list
+  - codehilite:
+      guess_lang: False
+      use_pygments: False
+  - def_list
+  - footnotes
+  - meta
+  - toc:
+      permalink: true
 
-include_homepage_in_sidebar: false
 
 nav:
   - Project overview: index.md
   - Introduction: intro.md
   - Components: components.md
   - Open Standards: standards.md
+  - LDN+AS2 Notifications: ldn-as2.md
 
 #nav:
 #    - Home: 'index.md'
