@@ -23,7 +23,7 @@ The activity property may (and often will) contain the following properties:
 
 
 
-AS2 Activities that express the state of an Artifact: as:Create, as:Update, as:Remove, as:Announce:  
+AS2 Activities that express the state of an Artifact: `as:Create`, `as:Update`, `as:Remove`, `as:Announce`:  
 
  * `as:Create`: An Agent created an Artifact that is made available by a Data Node.
  * `as:Update`: An Agent updated an Artifact that is made available by a Data Node.
