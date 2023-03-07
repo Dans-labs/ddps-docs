@@ -1,5 +1,11 @@
 # DICE Digital Preservation Service
 
+!!! warning "Living Document (WIP)"
+
+    This document is currently **under development**, which means **"Work in Progress"**.  
+    It is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.
+
+
 ## Introduction
 This document defines the Functional and Technical requirements for creating and using the DICE Digital Preservation Service (DDPS).
 This document is work in progress.
@@ -253,3 +259,5 @@ http://localhost:5000/api/linkset/7646043f7a784b5597e257e9f5d7450f/json
   ]
 }
 ```
+
+[DICE project]: {{ hyperlink.ext.dice }}

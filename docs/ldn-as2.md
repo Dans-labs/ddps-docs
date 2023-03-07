@@ -1,5 +1,15 @@
 Overview
 ========
+
+
+!!! warning "Living Document (WIP)"
+
+    This document is currently **under development**, which means **"Work in Progress"**.  
+    It is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.
+
+
+
+
 DDPS notifications are designed to be sent and received using the W3C Linked Data Notifications (LDN) standard. Payloads have a predictable structure, based primarily on Activity Streams 2.0, with some additional vocabularies included for particular properties.    
 The notification patterns used for this application, are more domain-specific implementations of the generic patterns described by [Event Notifications in Value-Adding Networks](https://www.eventnotifications.net/){taget="_blank"}.  
 An LDN+AS2 notification MUST specify an activity type, expressed in JSON-LD as @type or shortened as type, and its value MUST be the type of AS2 Activity that it describes. Only the subset of AS2 Activity Types shown here are supported:
@@ -299,3 +309,5 @@ Data Node sends a notification with activity type `as:Undo` to a Service Node ca
   }
 
 ```
+
+[DICE project]: {{ hyperlink.ext.dice }}
