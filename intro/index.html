@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html class="writer-html5" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="IE=edge" http-equiv="X-UA-Compatible"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="../img/favicon.ico" rel="shortcut icon"/>
+<title>Introduction - DICE Digital Preservation Service</title>
+<link href="../css/theme.css" rel="stylesheet"/>
+<link href="../css/theme_extra.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" rel="stylesheet"/>
+<script>
+        // Current page data
+        var mkdocs_page_name = "Introduction";
+        var mkdocs_page_input_path = "intro.md";
+        var mkdocs_page_url = null;
+      </script>
+<script defer="" src="../js/jquery-3.6.0.min.js"></script>
+<!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/json.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+</head>
+<body class="wy-body-for-nav" role="document">
+<div class="wy-grid-for-nav">
+<nav class="wy-nav-side stickynav" data-toggle="wy-nav-shift">
+<div class="wy-side-scroll">
+<div class="wy-side-nav-search">
+<a class="icon icon-home" href=".."> DICE Digital Preservation Service
+        </a><div role="search">
+<form action="../search.html" class="wy-form" id="rtd-search-form" method="get">
+<input name="q" placeholder="Search docs" title="Type search term here" type="text"/>
+</form>
+</div>
+</div>
+<div aria-label="Navigation menu" class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="..">Project overview</a>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal current" href="./">Introduction</a>
+<ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#namespaces">Namespaces</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#use-cases">Use cases</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#1-single-record-archiving">1. Single record archiving</a>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#2-communitys-records">2. Community's records</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#activity-diagram-single-record-archiving">Activity Diagram Single record archiving</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#ldn-activities">LDN Activities</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#types-of-activities">Types of activities</a>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#b2share-long-term-archiving-module">B2SHARE Long Term Archiving Module</a>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#b2share-signposting-module">B2SHARE Signposting Module</a>
+<ul>
+<li class="toctree-l3"><a class="reference internal" href="#b2share-signposting-module-output-example">B2SHARE Signposting Module output example</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../components/">Components</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../standards/">Open Standards</a>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../ldn-as2/">LDN+AS2 Notifications</a>
+</li>
+</ul>
+</div>
+</div>
+</nav>
+<section class="wy-nav-content-wrap" data-toggle="wy-nav-shift">
+<nav aria-label="Mobile navigation menu" class="wy-nav-top" role="navigation">
+<i class="fa fa-bars" data-toggle="wy-nav-top"></i>
+<a href="..">DICE Digital Preservation Service</a>
+</nav>
+<div class="wy-nav-content">
+<div class="rst-content"><div aria-label="breadcrumbs navigation" role="navigation">
+<ul class="wy-breadcrumbs">
+<li><a alt="Docs" class="icon icon-home" href=".."></a> »</li>
+<li>Introduction</li>
+<li class="wy-breadcrumbs-aside">
+<a href="https://github.com/Dans-labs/ddps-docs/edit/master/docs/intro.md">Edit on DICE Digital Preservation Service</a>
+</li>
+</ul>
+<hr/>
+</div>
+<div class="document" itemscope="itemscope" itemtype="http://schema.org/Article" role="main">
+<div class="section" itemprop="articleBody">
+<h1 id="dice-digital-preservation-service">DICE Digital Preservation Service<a class="headerlink" href="#dice-digital-preservation-service" title="Permanent link">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Living Document (WIP)</p>
+<p>This document is currently <strong>under development</strong>, which means <strong>"Work in Progress"</strong>.<br/>
+It is carried out in the context of the <a href="https://www.dice-eosc.eu/" target="_blank">DICE project</a> (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.</p>
+</div>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">¶</a></h2>
+<p>This document defines the Functional and Technical requirements for creating and using the DICE Digital Preservation Service (DDPS).
+This document is work in progress.</p>
+<p>The technical specifications for long-term-archiving notifications are being developed within DICE Task 4.3: Long Term Preservation.<br/>
+It will use the following open web standards:</p>
+<ul>
+<li><a href="https://www.w3.org/TR/ldn/" target="_blank">Linked Data Notification</a>" (W3C) =&gt; Notification protocol</li>
+<li><a href="https://www.w3.org/TR/json-ld/#introduction" target="_blank">JSON-LD 1.1</a> (Serialisation)</li>
+<li><a href="https://www.w3.org/TR/activitystreams-core/" target="_blank">Activity Streams 2 Core</a> (W3C)<ul>
+<li><a href="https://www.w3.org/TR/activitystreams-vocabulary" target="_blank">ActivityStreams 2.0 Vocabulary</a></li>
+<li><a href="https://www.w3.org/ns/activitystreams" target="_blank">ActivityStreams 2.0 Terms</a></li>
+</ul>
+</li>
+<li><a href="https://www.w3.org/TR/activitystreams-vocabulary" target="_blank">Activity Vocabulary</a></li>
+<li><a href="https://signposting.org/FAIR/" target="_blank">FAIR Signposting Profile</a> =&gt; Navigational</li>
+</ul>
+<h2 id="namespaces">Namespaces<a class="headerlink" href="#namespaces" title="Permanent link">¶</a></h2>
+<p>Within this document, the following namespace prefix bindings are used:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Prefix</th>
+<th align="left">Namespace</th>
+<th align="left">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>as</code></td>
+<td align="left">https://www.w3.org/ns/activitystreams#</td>
+<td align="left">W3C ActivityStreams 2.0</td>
+</tr>
+<tr>
+<td align="left"><code>ldp</code></td>
+<td align="left">http://www.w3.org/ns/ldp#</td>
+<td align="left">W3C Linked Data Platform (LDP) Vocabulary</td>
+</tr>
+<tr>
+<td align="left"><code>ddps</code></td>
+<td align="left">http://some.example.org/ns/ddps#</td>
+<td align="left">DICE Digital Preservation Service</td>
+</tr>
+<tr>
+<td align="left"><code>so</code></td>
+<td align="left">https://schema.org/</td>
+<td align="left">Schema.org</td>
+</tr>
+</tbody>
+</table>
+<p>Examples of notification payloads use [JSON-LD] as syntax.
+In our example LDN+AS2 payloads we use [JSON-LD] as syntax. In these examples we don’t explicity write the prefixes.
+The @context element in JSON-LD defines a mapping from the terms to [URI]-s.</p>
+<h2 id="use-cases">Use cases<a class="headerlink" href="#use-cases" title="Permanent link">¶</a></h2>
+<h3 id="1-single-record-archiving">1. Single record archiving<a class="headerlink" href="#1-single-record-archiving" title="Permanent link">¶</a></h3>
+<p>A single record will be archived on demand, according to the LTP Policy.</p>
+<h3 id="2-communitys-records">2. Community's records<a class="headerlink" href="#2-communitys-records" title="Permanent link">¶</a></h3>
+<p>All records with a B2SHARE community will be auto-archived, according to a community archival agreement(?).</p>
+<h2 id="activity-diagram-single-record-archiving">Activity Diagram Single record archiving<a class="headerlink" href="#activity-diagram-single-record-archiving" title="Permanent link">¶</a></h2>
+<p><img alt="" src="https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgYXV0b251bWJlclxuICAgIFxuICAgIGFjdG9yIGFsaWNlIGFzIEFsaWNlXG4gICAgcGFydGljaXBhbnQgcmVwbyBhcyBXZWIgUmVwb3NpdG9yeVxuICAgIHBhcnRpY2lwYW50IGJvdCBhcyBBcmNoaXZhbCBCb3RcbiAgICBwYXJ0aWNpcGFudCBhcmNoaXZlIGFzIExUUCBEYXRhIEFyY2hpdmVcblxuICAgIGFsaWNlLT4-cmVwbzogTG9naW4gb24gbGFuZGluZ3BhZ2VcbiAgICBhbGljZS0-PnJlcG86IFJlcXVlc3QgZm9yIExUUFxuICAgIHJlcG8tPj5hcmNoaXZlOiBTZW5kIChMRE4pIGFzMjpPZmZlciBub3RpZmljYXRpb24gPExhbmRpbmdwYWdlIHwgTGluayBTZXQ-XG4gICAgcmVwby0-PnJlcG86IFNldCBzdGF0dXM6IFwiTFRQIGluIHJlcXVlc3RcIlxuICAgIGxvb3AgUG9sbCBMRE4gaW5ib3hcbiAgICAgICAgYm90LT4-YXJjaGl2ZTogR2V0IChMRE4pIGFzMjpPZmZlclxuICAgIGVuZFxuICAgIGJvdC0-PmJvdDogQ2hlY2sgdmFsaWRpdHkgb2YgTEROIGFzMjpPZmZlclxuICAgIFxuICAgIGFsdCBWQUxJRDogQWNjZXB0IGFzMjpPZmZlclxuICAgICAgICBib3QtPj5yZXBvOiBTZW5kIChMRE4pIGFzMjpBY2NlcHRcbiAgICAgICAgcmVwby0-PnJlcG86IFVwZGF0ZSBzdGF0dXM6IFwiTFRQIGluIHByb2dyZXNzXCJcbiAgICBvcHQgTGFuZGluZ3BhZ2UgVVJMIG9ubHlcbiAgICAgICAgYm90LT4-cmVwbzogSFRUUCBIRUFEIChTaWducG9zdGluZylcbiAgICAgICAgcmVwby0tPj5ib3Q6IExpbmsgU2V0IExvY2F0aW9uXG4gICAgZW5kXG4gICAgYm90LT4-cmVwbzogSFRUUCBHRVQgTGluayBTZXQgKFNpZ25wb3N0aW5nKVxuICAgICUlbm90ZSByaWdodCBvZiBib3Q6IEhhXG4gICAgYm90LT4-cmVwbzogSFRUUCBHRVQgTGluayBTZXQgb2JqZWN0cyAoU2lnbnBvc3RpbmcpXG4gICAgYm90LT4-YXJjaGl2ZTogSFRUUCBQT1NUL1BVVCBEYXRhU2V0IG9iamVjdHNcbiAgICBib3QtPj5yZXBvOiBTZW5kIChMRE4pIGFzMjpBbm5vdW5jZVxuICAgIHJlcG8tPj5yZXBvOiBVcGRhdGUgc3RhdHVzOiBcIkxUUCBBcmNoaXZlZFwiXG5cbiAgICBlbHNlIElOVkFMSUQ6IHJlamVjdCBhczI6T2ZmZXJcbiAgICAgICAgYm90LT4-cmVwbzogU2VuZCAoTEROKSBhczI6UmVqZWN0XG4gICAgICAgIHJlcG8tPj5yZXBvOiBDbGVhciBMVFAgc3RhdHVzXG4gICAgZW5kXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiYmFzZSIsInRoZW1lVmFyaWFibGVzIjp7Im1haW5Ca2ciOiIjQjRCRkQ4IiwiYWN0b3JCa2ciOiIjRURGMUZDIiwiYWN0b3JCb3JkZXIiOiIjNjk3RkIyIiwiYWN0b3JUZXh0Q29sb3IiOiIjMkEzNzU3Iiwibm90ZVRleHRDb2xvciI6IiNGOEY4RjgiLCJub3RlQmtnQ29sb3IiOiIjMkEzNzU3IiwiZm9udFNpemUiOiIxNnB4In19LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9"/></p>
+<ol>
+<li>The user of the <strong>Web Repository</strong> needs to be logged in.</li>
+<li>User hits "LTP" button on the landingpage of the dataset that he/she owns. Otherwise no button will be available.</li>
+<li>The <strong>Web Repository</strong> sends a Linked Data Notification<code>as2:Offer</code>to the LDN<code>ldp:inbox</code>of the <strong>LTP Data Archive</strong>. The payload should hold the landingpage URL (PID) related to the scholary object/Dataset. This way, associated resources of the dataset can be found by using FAIR Signposting discovery methods (9). If, for some reason, the landingpage URL/PID is not available at this point, the URL of the Link Set for this scholary object must be supplied. This way the <strong>Archival Bot</strong> can directly access the serialized Link Set (11) holding all Typed Links, without using Signposting discovery method(s).</li>
+</ol>
+<pre><code class="language-json">    {
+      "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        "https://purl.org/dice/ltp"
+      ],
+      "actor": {
+        "id": "https://b2share/",
+        "name": "repository.org",
+        "type": ""
+      },
+      "id": "urn:uuid:0370c0fb-bb78-4a9b-87f5-bed307a509dd",
+      "object": {
+        "id": "https://research-organisation.org/repository/dataset/201203/421/",
+        "ietf:cite-as": "https://doi.org/10.5555/12345680",
+        "type": "sorg:AboutPage",
+        "url": {
+          "id": "https://research-organisation.org/repository/dataset/201203/421/content.pdf",
+          "media-type": "application/pdf",
+          "type": [
+            "Dataset",
+            "sorg:ScholarlyObject"
+          ]
+        }
+      },
+      "origin": {
+        "id": "https://research-organisation.org/repository",
+        "inbox": "https://research-organisation.org/repository/inbox/",
+        "type": "Service"
+      },
+      "target": {
+        "id": "https://sample.com/system",
+        "inbox": "https://sample.com/system/inbox/",
+        "type": "Service"
+      },
+      "type": [
+        "Offer",
+        "ddps:ArchiveAction"
+      ]
+    }
+</code></pre>
+<ol>
+<li>The <strong>Web Repository</strong> marks the landingpage of the scholary object/dataset that a request for Long Term Archiving is pending.    </li>
+<li>The<code>as2:Offer</code>in the LDN<code>ldp:inbox</code>of the <strong>LTP Data Archive</strong> is picked up by the <strong>Archival Bot</strong> </li>
+<li><strong>Archival Bot</strong> determines if this<code>as2:Offer</code>is valid against known rules. (e.g: registered domain, etc). It will either accept(7) or reject(16) the<code>as2:Offer</code> </li>
+<li><strong>Archival Bot</strong> sends an<code>as2:Accept</code>notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.  </li>
+</ol>
+<p><u><em>Example JSON-LD payload</em></u>:</p>
+<pre><code class="language-json">{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://purl.org/dice/ltp"
+  ],
+  "actor": {
+    "id": "https://b2share/",
+    "name": "Some repo",
+    "type": ""
+  }, (...)
+</code></pre>
+<ol start="8"><li>The <b>Web Repository</b> updates the status of the landingpage from request pending to Long Term Archiving in progress.    
+<li>**OPTION** Signposting; The <b>Archival Bot</b> will request the Link Set URL from the **Web Repository** by either HTTP header or HTML <head> of the landingpage URL (PID).  
+<li>The Link Set location is returned by the <b>Web Repository</b>.  
+<li>The **Archival Bot** retrieves the seriailized Link Set from the <b>Web Repository</b>.  
+<li>The **Archival Bot** retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.    
+<li>The **Archival Bot** prepares and sends all content resources to the the **LTP Data Archive**.  
+<li>**Archival Bot** sends an `as2:Announce` notification to the LDN`ldp:inbox`of the <b>Web Repository</b>.  
+<li>The <b>Web Repository</b> updates the status of the landingpage from Long Term Archiving in progress to Long Term Archived, including a link to the archive (?).    
+<li>**Archival Bot** sends an `as2:Reject` notification to the LDN `ldp:inbox` of the <b>Web Repository</b>.  
+<li>The <b>Web Repository</b> cleares the LTP status of the landingpage, because the as:Offer was not accepted by the **Archival Bot**.  
+</li></li></li></li></li></li></li></li></head></li></li></ol>
+<h2 id="ldn-activities">LDN Activities<a class="headerlink" href="#ldn-activities" title="Permanent link">¶</a></h2>
+<p>A notification is sent by a actor to inform another actor about an activity. An Activity is some action that occurred, pertaining to a certain artefact in the network. Activities are described by the notification payload.</p>
+<p>Notification payloads are expressed in [activitystreams-vocabulary] and use [JSON-LD] as default syntax (other RDF syntaxes are allowed as well). A payload is uniquely identified, indicates the type of activity it is describing, and includes some descriptive metadata about the activity.</p>
+<h3 id="types-of-activities">Types of activities<a class="headerlink" href="#types-of-activities" title="Permanent link">¶</a></h3>
+<p>Notification payloads apply the <a href="https://www.w3.org/TR/activitystreams-vocabulary">ActivityStreams 2.0 vocabulary</a>. Therefore, the notification payload MUST be typed as an<code>as:Activity</code>or as one of its more specialized subtypes.  </p>
+<table>
+<thead>
+<tr>
+<th align="left">Activity Type</th>
+<th align="left">Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="https://www.w3.org/TR/activitystreams-vocabulary#dfn-offer"><code>as:Offer</code></a></td>
+<td align="left">(...)</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3.org/TR/activitystreams-vocabulary#dfn-accept"><code>as:Accept</code></a></td>
+<td align="left">(...)</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3.org/TR/activitystreams-vocabulary#dfn-announce"><code>as:Announce</code></a></td>
+<td align="left">(...)</td>
+</tr>
+<tr>
+<td align="left"><a href="https://www.w3.org/TR/activitystreams-vocabulary#dfn-reject"><code>as:Reject</code></a></td>
+<td align="left">(...)</td>
+</tr>
+<tr>
+<td align="left"><code>as:xxx</code></td>
+<td align="left">(...)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="b2share-long-term-archiving-module">B2SHARE Long Term Archiving Module<a class="headerlink" href="#b2share-long-term-archiving-module" title="Permanent link">¶</a></h2>
+<p>To be implemented. Main question here is how B2SHARE should preserve state of the archiving status of a scholary object?<br/>
+Two options may be recognized:
+1. By polling the LT-Archive (B2SHARE must hold state of the LT-Archive location/identifier).
+2. By reading it's own LDN-Inbox, which should be implemented in the LTA Module.</p>
+<h2 id="b2share-signposting-module">B2SHARE Signposting Module<a class="headerlink" href="#b2share-signposting-module" title="Permanent link">¶</a></h2>
+<p>Open Pull Request: https://github.com/EUDAT-B2SHARE/b2share/pull/1813  </p>
+<p>According to the latest update of the <a href="https://signposting.org/FAIR/">FAIR Signposting Profile</a>, the <code>type</code> for a landingpage needs to be revised. It should contain both <code>so:AboutPage</code> as well as the type of the scholary work the <code>so:AboutPage</code> represents, i.e: <code>so:Dataset</code>.<br/>
+This way child content resources of the scholary object will inherit this <code>type</code> and do not explicitly need to declare it again (?).<br/>
+If the Link Set is discoverable by either HTTP HEAD or HTML <header> it will adhere to Signposting Level 1. To achief Level 2, the content resources need to expose a Link Set too, by using the HTTP Link header approach, which is not (yet) the case.  </header></p>
+<p><a href="https://docs.google.com/document/d/1UKK1Q6CIFRgdmcmxLoILVxEF9f2QHAqcRLVCuOoV0eE">Open issue</a>: Type (as Link relation Type) i.e. file description is not present in the B2SHARE (meta)data model. This element can therefore not be extracted and added to the linkset.<br/>
+Q: How can <code>type</code> be available from the output example below?</p>
+<h3 id="b2share-signposting-module-output-example">B2SHARE Signposting Module output example<a class="headerlink" href="#b2share-signposting-module-output-example" title="Permanent link">¶</a></h3>
+<p>http://localhost:5000/api/linkset/7646043f7a784b5597e257e9f5d7450f/json</p>
+<pre><code class="language-json">{
+  "linkset": [
+    {
+      "anchor": "http://localhost:5000/records/7646043f7a784b5597e257e9f5d7450f",
+      "cite-as": [
+        {
+          "href": "https://doi.org/10.15497/A675341C-F705-4136-B7C3-B9C14B556186"
+        }
+      ],
+      "describedby": [
+        {
+          "href": "https://citation.crosscite.org/format?style=bibtex&amp;doi=10.15497/A675341C-F705-4136-B7C3-B9C14B556186",
+          "type": "application/x-bibtex"
+        }
+      ],
+      "item": [
+        {
+          "href": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile",
+          "type": "application/octet-stream"
+        },
+        {
+          "href": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver0",
+          "type": "application/octet-stream"
+        },
+        {
+          "href": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver1",
+          "type": "application/octet-stream"
+        },
+        {
+          "href": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver2",
+          "type": "application/octet-stream"
+        },
+        {
+          "href": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver3",
+          "type": "application/octet-stream"
+        }
+      ],
+      "license": {
+        "href": "http://creativecommons.org/licenses/by/4.0/"
+      },
+      "type": [
+        {
+          "href": "https://schema.org/AboutPage"
+        }
+      ]
+    },
+    {
+      "anchor": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile",
+      "collection": [
+        {
+          "href": "http://localhost:5000/records/7646043f7a784b5597e257e9f5d7450f",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver0",
+      "collection": [
+        {
+          "href": "http://localhost:5000/records/7646043f7a784b5597e257e9f5d7450f",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver1",
+      "collection": [
+        {
+          "href": "http://localhost:5000/records/7646043f7a784b5597e257e9f5d7450f",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver2",
+      "collection": [
+        {
+          "href": "http://localhost:5000/records/7646043f7a784b5597e257e9f5d7450f",
+          "type": "text/html"
+        }
+      ]
+    },
+    {
+      "anchor": "http://localhost:5000/api/files/9d5cb5d6-9a5b-4819-bd45-48e9f7984ed0/myfile-ver3",
+      "collection": [
+        {
+          "href": "http://localhost:5000/records/7646043f7a784b5597e257e9f5d7450f",
+          "type": "text/html"
+        }
+      ]
+    }
+  ]
+}
+</code></pre>
+</div>
+</div><footer>
+<div aria-label="Footer Navigation" class="rst-footer-buttons" role="navigation">
+<a class="btn btn-neutral float-left" href=".." title="Project overview"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+<a class="btn btn-neutral float-right" href="../components/" title="Components">Next <span class="icon icon-circle-arrow-right"></span></a>
+</div>
+<hr/>
+<div role="contentinfo">
+<!-- Copyright etc -->
+</div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+</div>
+</div>
+</section>
+</div>
+<div aria-label="Versions" class="rst-versions" role="note">
+<span class="rst-current-version" data-toggle="rst-current-version">
+<span><a href=".." style="color: #fcfcfc">« Previous</a></span>
+<span><a href="../components/" style="color: #fcfcfc">Next »</a></span>
+</span>
+</div>
+<script>var base_url = '..';</script>
+<script defer="" src="../js/theme_extra.js"></script>
+<script defer="" src="../js/theme.js"></script>
+<script defer="" src="../search/main.js"></script>
+<script defer="">
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+</body>
+</html>

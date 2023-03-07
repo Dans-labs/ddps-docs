@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>LDN+AS2 Notifications - DICE Digital Preservation Service</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "LDN+AS2 Notifications";
+        var mkdocs_page_input_path = "ldn-as2.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/json.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> DICE Digital Preservation Service
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Project overview</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../intro/">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../components/">Components</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../standards/">Open Standards</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">LDN+AS2 Notifications</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#data-node-requests-service">Data Node requests service</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#service-node-acknowledges-a-service-request">Service Node acknowledges a service request</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#accept">Accept</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reject">Reject</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#service-node-provides-service-result">Service Node provides Service Result</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#data-node-cancels-prior-service-request">Data Node cancels prior service request</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">DICE Digital Preservation Service</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>LDN+AS2 Notifications</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Dans-labs/ddps-docs/edit/master/docs/ldn-as2.md">Edit on DICE Digital Preservation Service</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Living Document (WIP)</p>
+<p>This document is currently <strong>under development</strong>, which means <strong>"Work in Progress"</strong>.<br />
+It is carried out in the context of the <a href="https://www.dice-eosc.eu/" target="_blank">DICE project</a> (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.</p>
+</div>
+<p>DDPS notifications are designed to be sent and received using the W3C Linked Data Notifications (LDN) standard. Payloads have a predictable structure, based primarily on Activity Streams 2.0, with some additional vocabularies included for particular properties.  <br />
+The notification patterns used for this application, are more domain-specific implementations of the generic patterns described by <a href="https://www.eventnotifications.net/" taget="_blank">Event Notifications in Value-Adding Networks</a>.<br />
+An LDN+AS2 notification MUST specify an activity type, expressed in JSON-LD as @type or shortened as type, and its value MUST be the type of AS2 Activity that it describes. Only the subset of AS2 Activity Types shown here are supported:</p>
+<p>The activity must contain the following properties:</p>
+<ul>
+<li><code>@context</code>: This is the JSON-LD 'context' for the activity.</li>
+<li><code>id</code>: This must be a URI, and the use of URN:UUID is recommended. An HTTP URI may be used, but in such cases the URI should resolve to a resource which represents the activity.</li>
+<li><code>type</code>: This should include one of the Activity Stream 2.0 Activity Types. It may (depending on the activity) also include a type from the Notify Activity Types vocabulary</li>
+<li><code>origin</code>: The originator of the activity, typically the service responsible for sending the notification.</li>
+<li><code>object</code>: This should be the focus of the activity. Other object properties may appear in notifications, as properties of other properties.</li>
+<li><code>target</code>: The intended destination of the activity, typically the service which consumes the notification.</li>
+</ul>
+<p>The activity property may (and often will) contain the following properties:</p>
+<ul>
+<li><code>actor</code>: This identifies the party or process that initiated the activity.</li>
+<li><code>inReplyTo</code>: This property is used when the notification is a direct response to a previous notification (usually a request) and references the Activity Streams 2.0 activity id of the previous notification.</li>
+<li><code>context</code>: This identifies another resource which is relevant to understanding the notification.</li>
+</ul>
+<p>AS2 Activities that express the state of an Artifact: <code>as:Create</code>, <code>as:Update</code>, <code>as:Remove</code>, <code>as:Announce</code>:  </p>
+<ul>
+<li><code>as:Create</code>: An Agent created an Artifact that is made available by a Data Node.</li>
+<li><code>as:Update</code>: An Agent updated an Artifact that is made available by a Data Node.</li>
+<li><code>as:Remove</code>: An Agent deleted an Artifact that is made available by a Data Node.</li>
+<li><code>as:Announce</code>: An Agent announces the existence of an Artifact that is made available by a Data Node. Unlike as:Create, which conveys when an Artifact was created, as:Announce merely conveys its existence.</li>
+</ul>
+<p>AS2 Activities that pertain to applying value-adding services to an Artifact: as:Offer, as:Accept, as:Reject, as:Announce, and as:Undo:  </p>
+<ul>
+<li><code>as:Offer</code>: An Agent offers an Artifact to another Agent in order to request the provision of a service.</li>
+<li><code>as:Accept</code>: An Agent accepts to provide a service that was requested for a specific Artifact by another Agent. This is a reply to a previously received as:Offer.</li>
+<li><code>as:Reject</code>: An Agent declines to provide a service that was requested for a specific Artifact by another Agent. This is a reply to a previously received as:Offer.</li>
+<li><code>as:Announce</code>: An Agent announces a Service Result pertaining to an Artifact that is either the result of executing a previously requested service or is volunteered.</li>
+<li><code>as:Undo</code>: An Agent retracts a prior activity of type as:Offer, as:Accept, as:Reject, or as:Announce.</li>
+</ul>
+<p>In addition to these AS2 Activity Types, types ([URI]s) originating from vocabularies chosen by an application domain MAY be specified.<br />
+For <code>as:object</code>, one of the core Object Types MUST be expressed. In addition to these Object Types, types ([URI]s) originating from vocabularies chosen by an application domain MAY be specified.<br />
+Both <code>as:actor</code>, <code>as:origin</code>, and <code>as:target</code> SHOULD have an LDN Inbox. The [URL] of the LDN Inbox:<br />
+ * Can be provided as the value of ldp:inbox in the description of these entities in the notification payload;
+ * Can be discovered as the link target of a link with the http://www.w3.org/ns/ldp#inbox link relation type provided in the HTTP Link response header of the [URL] of the LDN Inbox.</p>
+<p>When sending a notification to a Data Node that pertains to one of the Artifacts it makes available, the LDN+AS2 notification SHOULD include the as:context property and, when included, MUST at least convey the Artifact’s [URL] as its value.  </p>
+<p>An LDN+AS2 notification that is sent in response to a previously received notification, MUST include the as:inReplyTo property, and its value MUST be the activity identifier (value of the id property) of the previous notification.  </p>
+<h2 id="data-node-requests-service">Data Node requests service<a class="headerlink" href="#data-node-requests-service" title="Permanent link">&para;</a></h2>
+<p>The requirements regarding properties are summarized in the table below and their use is subject to the guidelines provided in <a href="https://www.eventnotifications.net/#Activities" target="_blank">§5 Properties in LDN+AS2 Notifications</a>.</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: [ 
+      &quot;https://www.w3.org/ns/activitystreams&quot; ,
+      {&quot;schema&quot;: &quot;https://schema.org/&quot;}
+    ], 
+    &quot;id&quot;: &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot;,
+    &quot;type&quot;: &quot;Offer&quot;,
+    &quot;actor&quot;: {
+       &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+       &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    },
+    &quot;origin&quot;: {
+       &quot;id&quot;: &quot;https://acme.org/system&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute System&quot;,
+       &quot;type&quot;: &quot;Application&quot;
+    },
+    &quot;object&quot;: {
+       &quot;id&quot;: &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot;,
+       &quot;type&quot;: [ &quot;Document&quot; , &quot;schema:Dataset&quot; ]
+    },
+    &quot;target&quot;: {     
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+       &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+       &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    }
+  }
+
+
+</code></pre>
+<h2 id="service-node-acknowledges-a-service-request">Service Node acknowledges a service request<a class="headerlink" href="#service-node-acknowledges-a-service-request" title="Permanent link">&para;</a></h2>
+<h3 id="accept">Accept<a class="headerlink" href="#accept" title="Permanent link">&para;</a></h3>
+<p>An Agent operating on behalf of a Service Node can send a notification to an Agent operating at the end of a Data Node to acknowledge the receipt of a service request and to indicate whether the service will actually be provided.<br />
+The Data Archive XYZ (Service Node) notifies the ACME Research Institute (Data Node) in a request-response pattern that it <strong>accepts</strong> the offer ACME sent in a previous activity notification.</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: [ 
+      &quot;https://www.w3.org/ns/activitystreams&quot; ,
+      {&quot;schema&quot;: &quot;https://schema.org/&quot;}
+    ], 
+    &quot;id&quot;: &quot;urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB&quot;,
+    &quot;type&quot;: &quot;Accept&quot;,
+    &quot;actor&quot;: {
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+       &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+       &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    },
+    &quot;origin&quot;: {
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/system&quot;,
+       &quot;name&quot;: &quot;XYZ Archiving Department&quot;,
+       &quot;type&quot;: &quot;Application&quot;
+    },
+    &quot;inReplyTo&quot; : &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot; ,
+    &quot;context&quot; : &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot; ,
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot;,
+        &quot;type&quot;: &quot;Offer&quot;,
+        &quot;actor&quot;: {
+           &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+           &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+           &quot;name&quot;: &quot;ACME Research Institute&quot;,
+           &quot;type&quot;: &quot;Organization&quot;
+        },
+        &quot;origin&quot;: {
+           &quot;id&quot;: &quot;https://acme.org/system&quot;,
+           &quot;name&quot;: &quot;ACME Research Institute System&quot;,
+           &quot;type&quot;: &quot;Application&quot;
+        },
+        &quot;object&quot;: {
+           &quot;id&quot;: &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot;,
+           &quot;type&quot;: [ &quot;Document&quot; , &quot;schema:Dataset&quot; ]
+        },
+        &quot;target&quot;: {     
+           &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+           &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+           &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+           &quot;type&quot;: &quot;Organization&quot;
+        }
+    },
+    &quot;target&quot;: {     
+       &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+       &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    }
+  }
+</code></pre>
+<h3 id="reject">Reject<a class="headerlink" href="#reject" title="Permanent link">&para;</a></h3>
+<p>The Data Archive XYZ (Service Node) notifies the ACME Research Institute (Data Node) in a request-response pattern that it <strong>rejects</strong> the offer ACME sent in a previous activity notification. </p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: [ 
+      &quot;https://www.w3.org/ns/activitystreams&quot; ,
+      {&quot;schema&quot;: &quot;https://schema.org/&quot;}
+    ], 
+    &quot;id&quot;: &quot;urn:uuid:ED4CB09E-F74C-44E8-AA0D-BA74CDE0CDC7&quot;,
+    &quot;type&quot;: &quot;Reject&quot;,
+    &quot;actor&quot;: {
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+       &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+       &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    },
+    &quot;origin&quot;: {
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/system&quot;,
+       &quot;name&quot;: &quot;XYZ Archiving Department&quot;,
+       &quot;type&quot;: &quot;Application&quot;
+    },
+    &quot;inReplyTo&quot; : &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot; ,
+    &quot;context&quot; : &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot; ,
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot;,
+        &quot;type&quot;: &quot;Offer&quot;,
+        &quot;actor&quot;: {
+           &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+           &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+           &quot;name&quot;: &quot;ACME Research Institute&quot;,
+           &quot;type&quot;: &quot;Organization&quot;
+        },
+        &quot;origin&quot;: {
+           &quot;id&quot;: &quot;https://acme.org/system&quot;,
+           &quot;name&quot;: &quot;ACME Research Institute System&quot;,
+           &quot;type&quot;: &quot;Application&quot;
+        },
+        &quot;object&quot;: {
+           &quot;id&quot;: &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot;,
+           &quot;type&quot;: [ &quot;Document&quot; , &quot;schema:Dataset&quot; ]
+        },
+        &quot;target&quot;: {     
+           &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+           &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+           &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+           &quot;type&quot;: &quot;Organization&quot;
+        }
+    },
+    &quot;target&quot;: {     
+       &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+       &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    }
+  }
+</code></pre>
+<h2 id="service-node-provides-service-result">Service Node provides Service Result<a class="headerlink" href="#service-node-provides-service-result" title="Permanent link">&para;</a></h2>
+<p>The Service Node has a Service Result available pertaining to the Artifact on the Data Node. The Service Node sends an Announce notification to the Data Node about this fact.</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: [ 
+      &quot;https://www.w3.org/ns/activitystreams&quot; ,
+      {&quot;schema&quot;: &quot;https://schema.org/&quot;}
+    ], 
+    &quot;id&quot;: &quot;urn:uuid:ED0E06DA-4294-43C0-8E87-800558E4045B&quot;,
+    &quot;type&quot;: &quot;Announce&quot;,
+    &quot;actor&quot;: {
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+       &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+       &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    },
+    &quot;origin&quot;: {
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/system&quot;,
+       &quot;name&quot;: &quot;XYZ Archiving Department&quot;,
+       &quot;type&quot;: &quot;Application&quot;
+    },
+    &quot;inReplyTo&quot; : &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot; ,
+    &quot;context&quot; : &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot; ,
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:CF21A499-1BDD-4B59-984A-FC94CF6FBA86&quot;,
+        &quot;type&quot;: &quot;Relationship&quot;,
+        &quot;subject&quot;: &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot;,
+        &quot;relationship&quot;: &quot;https://www.iana.org/memento&quot;,
+        &quot;object&quot;: &quot;https://data.archive.xyz.net/data/memento/21daF1921&quot;
+     },
+    &quot;target&quot;: {     
+       &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+       &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    }
+  }
+</code></pre>
+<h2 id="data-node-cancels-prior-service-request">Data Node cancels prior service request<a class="headerlink" href="#data-node-cancels-prior-service-request" title="Permanent link">&para;</a></h2>
+<p>Data Node sends a notification with activity type <code>as:Undo</code> to a Service Node canceling its previous Offer notification.</p>
+<pre><code class="language-json">{ 
+    &quot;@context&quot;: [ 
+      &quot;https://www.w3.org/ns/activitystreams&quot; ,
+      {&quot;schema&quot;: &quot;https://schema.org/&quot;}
+    ], 
+    &quot;id&quot;: &quot;urn:uuid:70892B92-001E-40C8-B4E8-B70BBC334419&quot;,
+    &quot;type&quot;: &quot;Undo&quot;,
+    &quot;actor&quot;: {
+       &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+       &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    },
+    &quot;origin&quot;: {
+       &quot;id&quot;: &quot;https://acme.org/system&quot;,
+       &quot;name&quot;: &quot;ACME Research Institute System&quot;,
+       &quot;type&quot;: &quot;Application&quot;
+    },
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495&quot;,
+        &quot;type&quot;: &quot;Offer&quot;,
+        &quot;actor&quot;: {
+            &quot;id&quot;: &quot;https://acme.org/profile/card#us&quot;,
+            &quot;inbox&quot;: &quot;https://acme.org/inbox/&quot;,
+            &quot;name&quot;: &quot;ACME Research Institute&quot;,
+            &quot;type&quot;: &quot;Organization&quot;
+        },
+        &quot;origin&quot;: {
+            &quot;id&quot;: &quot;https://acme.org/system&quot;,
+            &quot;name&quot;: &quot;ACME Research Institute System&quot;,
+            &quot;type&quot;: &quot;Application&quot;
+        },
+        &quot;object&quot;: {
+            &quot;id&quot;: &quot;http://acme.org/artifacts/alice/data-set-2022-01-19.zip&quot;,
+            &quot;type&quot;: [ &quot;Document&quot; , &quot;schema:Dataset&quot; ]
+        },
+        &quot;target&quot;: {     
+            &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+            &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+            &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+            &quot;type&quot;: &quot;Organization&quot;
+        }
+    },
+    &quot;target&quot;: {     
+       &quot;id&quot;: &quot;https://data.archive.xyz.net/&quot;,
+       &quot;inbox&quot;: &quot;https://data.archive.xyz.net/inbox/&quot;,
+       &quot;name&quot;: &quot;Data Archive XYZ&quot;,
+       &quot;type&quot;: &quot;Organization&quot;
+    }
+  }
+
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../standards/" class="btn btn-neutral float-left" title="Open Standards"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../standards/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
