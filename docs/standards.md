@@ -5,6 +5,7 @@ Open Web Standards
 !!! warning "Living Document (WIP)"
 
     This document is currently **under development**, which means **"Work in Progress"**.  
+    Don’t cite this document other than as work in progress.  
     It is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.
 
 

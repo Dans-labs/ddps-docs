@@ -1,13 +1,14 @@
-# DICE Digital Preservation Service
+# Digital Preservation Service
 
 !!! warning "Living Document (WIP)"
 
     This document is currently **under development**, which means **"Work in Progress"**.  
+	Don’t cite this document other than as work in progress.  
     It is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.
 
 
 ## Introduction
-This document defines the Functional and Technical requirements for creating and using the DICE Digital Preservation Service (DDPS).
+This document defines the Functional and Technical requirements for creating and using the Digital Preservation Service (DPS).
 This document is work in progress.
 
 The technical specifications for long-term-archiving notifications are being developed within DICE Task 4.3: Long Term Preservation.  
@@ -27,15 +28,13 @@ Within this document, the following namespace prefix bindings are used:
 
 | Prefix 	 | Namespace                              | Name                                      |
 |:---------|:---------------------------------------|:------------------------------------------|
-| `as`     | https://www.w3.org/ns/activitystreams# | W3C ActivityStreams 2.0                   |
+| `as2`    | https://www.w3.org/ns/activitystreams# | W3C ActivityStreams 2.0                   |
 | `ldp`    | http://www.w3.org/ns/ldp#              | W3C Linked Data Platform (LDP) Vocabulary |
-| `ddps`   | http://some.example.org/ns/ddps#       | DICE Digital Preservation Service         |
 | `so`     | https://schema.org/                    | Schema.org                                |
 
 Examples of notification payloads use [JSON-LD] as syntax.
 In our example LDN+AS2 payloads we use [JSON-LD] as syntax. In these examples we don’t explicity write the prefixes.
 The @context element in JSON-LD defines a mapping from the terms to [URI]-s.
-
 
 
 ## Use cases
@@ -44,88 +43,305 @@ A single record will be archived on demand, according to the LTP Policy.
 ### 2. Community's records
 All records with a B2SHARE community will be auto-archived, according to a community archival agreement(?).
 
-## Activity Diagram Single record archiving
+## Activity Diagram Single Record Archiving
 
-![](https://mermaid.ink/img/eyJjb2RlIjoic2VxdWVuY2VEaWFncmFtXG4gICAgYXV0b251bWJlclxuICAgIFxuICAgIGFjdG9yIGFsaWNlIGFzIEFsaWNlXG4gICAgcGFydGljaXBhbnQgcmVwbyBhcyBXZWIgUmVwb3NpdG9yeVxuICAgIHBhcnRpY2lwYW50IGJvdCBhcyBBcmNoaXZhbCBCb3RcbiAgICBwYXJ0aWNpcGFudCBhcmNoaXZlIGFzIExUUCBEYXRhIEFyY2hpdmVcblxuICAgIGFsaWNlLT4-cmVwbzogTG9naW4gb24gbGFuZGluZ3BhZ2VcbiAgICBhbGljZS0-PnJlcG86IFJlcXVlc3QgZm9yIExUUFxuICAgIHJlcG8tPj5hcmNoaXZlOiBTZW5kIChMRE4pIGFzMjpPZmZlciBub3RpZmljYXRpb24gPExhbmRpbmdwYWdlIHwgTGluayBTZXQ-XG4gICAgcmVwby0-PnJlcG86IFNldCBzdGF0dXM6IFwiTFRQIGluIHJlcXVlc3RcIlxuICAgIGxvb3AgUG9sbCBMRE4gaW5ib3hcbiAgICAgICAgYm90LT4-YXJjaGl2ZTogR2V0IChMRE4pIGFzMjpPZmZlclxuICAgIGVuZFxuICAgIGJvdC0-PmJvdDogQ2hlY2sgdmFsaWRpdHkgb2YgTEROIGFzMjpPZmZlclxuICAgIFxuICAgIGFsdCBWQUxJRDogQWNjZXB0IGFzMjpPZmZlclxuICAgICAgICBib3QtPj5yZXBvOiBTZW5kIChMRE4pIGFzMjpBY2NlcHRcbiAgICAgICAgcmVwby0-PnJlcG86IFVwZGF0ZSBzdGF0dXM6IFwiTFRQIGluIHByb2dyZXNzXCJcbiAgICBvcHQgTGFuZGluZ3BhZ2UgVVJMIG9ubHlcbiAgICAgICAgYm90LT4-cmVwbzogSFRUUCBIRUFEIChTaWducG9zdGluZylcbiAgICAgICAgcmVwby0tPj5ib3Q6IExpbmsgU2V0IExvY2F0aW9uXG4gICAgZW5kXG4gICAgYm90LT4-cmVwbzogSFRUUCBHRVQgTGluayBTZXQgKFNpZ25wb3N0aW5nKVxuICAgICUlbm90ZSByaWdodCBvZiBib3Q6IEhhXG4gICAgYm90LT4-cmVwbzogSFRUUCBHRVQgTGluayBTZXQgb2JqZWN0cyAoU2lnbnBvc3RpbmcpXG4gICAgYm90LT4-YXJjaGl2ZTogSFRUUCBQT1NUL1BVVCBEYXRhU2V0IG9iamVjdHNcbiAgICBib3QtPj5yZXBvOiBTZW5kIChMRE4pIGFzMjpBbm5vdW5jZVxuICAgIHJlcG8tPj5yZXBvOiBVcGRhdGUgc3RhdHVzOiBcIkxUUCBBcmNoaXZlZFwiXG5cbiAgICBlbHNlIElOVkFMSUQ6IHJlamVjdCBhczI6T2ZmZXJcbiAgICAgICAgYm90LT4-cmVwbzogU2VuZCAoTEROKSBhczI6UmVqZWN0XG4gICAgICAgIHJlcG8tPj5yZXBvOiBDbGVhciBMVFAgc3RhdHVzXG4gICAgZW5kXG4iLCJtZXJtYWlkIjp7InRoZW1lIjoiYmFzZSIsInRoZW1lVmFyaWFibGVzIjp7Im1haW5Ca2ciOiIjQjRCRkQ4IiwiYWN0b3JCa2ciOiIjRURGMUZDIiwiYWN0b3JCb3JkZXIiOiIjNjk3RkIyIiwiYWN0b3JUZXh0Q29sb3IiOiIjMkEzNzU3Iiwibm90ZVRleHRDb2xvciI6IiNGOEY4RjgiLCJub3RlQmtnQ29sb3IiOiIjMkEzNzU3IiwiZm9udFNpemUiOiIxNnB4In19LCJ1cGRhdGVFZGl0b3IiOmZhbHNlLCJhdXRvU3luYyI6dHJ1ZSwidXBkYXRlRGlhZ3JhbSI6ZmFsc2V9)
+[![](https://mermaid.ink/img/pako:eNqtVdtO20AQ_ZXRVlFAoqqgLVCrQsqFFKQIolzoi1829jjZ4uy66zWCpvn3zvpC1o6RWqnkBe-ZmTM7lz1bFqgQmcc6na2Qwniw7aYYZFqYlzE-Ydz1oBsrlWL3BLpmjRvset0lz799lh88cC34MsbUZ-Tusw0Xsv-4oi-fvet_6o-Glz6z1jwwSr8i18PR6WjgIkqHqAvw_MvFqH_mgHN8NgMVqxI_6328-HxR4FIZbMCjS_vbw0T6hnOkpJmJX2hz99npefLss91u1-n4MsWfGcoAh4KvNN_4EuiPZ0bJbLOkRPPv8tSmCDwWAQJPoZeZtSoNEq6NCETCpQGNibL4d1zClP5PBbm9HNotlcnD6GAtnngMfWUOjXiO5nzj-QSG3PDSA31ZpmUTen91ZXk9GKuVkKAkxFyGQq4SvsI2u6m9d2ogoitR5MLEQmRBmXkwQxnC0Xh4d0zkZ959FKEGKrOIRMCNIIavi-mYCPc8v8dCPpKjuaqFKwjpGFLDTZbaHtjL6DKFBPMIPiu8VGJgwKklcZVkcX54h7pV_SrN69g7LGSoDtCqHCnl90ZeZd6FKx1WlaeVSYAqBEIu1fM-MhFWtBMVx02TPELDbrDG4BFoDERISwkqyp1eC18bw9jAQ298O4Qc8qAXBJiYpvGeoKp_rZ-F0xvVWCQhN9hoF41VotVKY5q6rbqN3BEAmol2_ps5xbi57g3haCZWkvbCkM9xI4OqHtUk0TwX09ZaOifyt-v53qmFodOxTwRosVobW96c5Yb_TTS1_IGBSduiFo7lkpa-k_vZ_MNkMc-X1fE_pGq2REqV0US3LE9rQ8p3ILTdKMsTpwi3d7XpmKJl_8fpKJz-z66wE7ZBTXoRkgJtLVBKSvEaW5mhV9o5b0hNMfqO4ICrOBXsyA64ulPHK_EBV31qJq7GgCsjlVVTiMBVItfIkaPWQG2iZLGdL3dUsyxv-XVo1YN5EafWnjArTLMXGTDP6Awro1K7SqvdH8l6frQ?type=png)](https://mermaid.live/edit#pako:eNqtVdtO20AQ_ZXRVlFAoqqgLVCrQsqFFKQIolzoi1829jjZ4uy66zWCpvn3zvpC1o6RWqnkBe-ZmTM7lz1bFqgQmcc6na2Qwniw7aYYZFqYlzE-Ydz1oBsrlWL3BLpmjRvset0lz799lh88cC34MsbUZ-Tusw0Xsv-4oi-fvet_6o-Glz6z1jwwSr8i18PR6WjgIkqHqAvw_MvFqH_mgHN8NgMVqxI_6328-HxR4FIZbMCjS_vbw0T6hnOkpJmJX2hz99npefLss91u1-n4MsWfGcoAh4KvNN_4EuiPZ0bJbLOkRPPv8tSmCDwWAQJPoZeZtSoNEq6NCETCpQGNibL4d1zClP5PBbm9HNotlcnD6GAtnngMfWUOjXiO5nzj-QSG3PDSA31ZpmUTen91ZXk9GKuVkKAkxFyGQq4SvsI2u6m9d2ogoitR5MLEQmRBmXkwQxnC0Xh4d0zkZ959FKEGKrOIRMCNIIavi-mYCPc8v8dCPpKjuaqFKwjpGFLDTZbaHtjL6DKFBPMIPiu8VGJgwKklcZVkcX54h7pV_SrN69g7LGSoDtCqHCnl90ZeZd6FKx1WlaeVSYAqBEIu1fM-MhFWtBMVx02TPELDbrDG4BFoDERISwkqyp1eC18bw9jAQ298O4Qc8qAXBJiYpvGeoKp_rZ-F0xvVWCQhN9hoF41VotVKY5q6rbqN3BEAmol2_ps5xbi57g3haCZWkvbCkM9xI4OqHtUk0TwX09ZaOifyt-v53qmFodOxTwRosVobW96c5Yb_TTS1_IGBSduiFo7lkpa-k_vZ_MNkMc-X1fE_pGq2REqV0US3LE9rQ8p3ILTdKMsTpwi3d7XpmKJl_8fpKJz-z66wE7ZBTXoRkgJtLVBKSvEaW5mhV9o5b0hNMfqO4ICrOBXsyA64ulPHK_EBV31qJq7GgCsjlVVTiMBVItfIkaPWQG2iZLGdL3dUsyxv-XVo1YN5EafWnjArTLMXGTDP6Awro1K7SqvdH8l6frQ)
 
+1. The <b>Author</b> logs in into the landingpage of the dataset that it owns on the **Web Repository** (authorized user).
+2. The authorized <b>Author</b> presses an archival-button, to start a Long Term Preservation (LTP) request for this dataset.
+3. The **Web Repository** (DataNode) sends a Linked Data Notification (LDN) Offer`as2:Offer`to the LDN inbox`ldp:inbox`of the **Archival Bot**. The payload MUST hold the landingpage URL of the scholary object/dataset. All associated resources can be found by using FAIR Signposting discovery methods (12). If, for some reason, the landingpage URL/PID is not available at this point, the URL of the Link Set for this scholary object must be supplied. This way the <b>Archival Bot</b> can directly access the serialized Link Set (14) holding all Typed Links, without using Signposting discovery method(s).
 
-1. The user of the **Web Repository** needs to be logged in.
-2. User hits "LTP" button on the landingpage of the dataset that he/she owns. Otherwise no button will be available.
-3. The **Web Repository** sends a Linked Data Notification`as2:Offer`to the LDN`ldp:inbox`of the **LTP Data Archive**. The payload should hold the landingpage URL (PID) related to the scholary object/Dataset. This way, associated resources of the dataset can be found by using FAIR Signposting discovery methods (9). If, for some reason, the landingpage URL/PID is not available at this point, the URL of the Link Set for this scholary object must be supplied. This way the **Archival Bot** can directly access the serialized Link Set (11) holding all Typed Links, without using Signposting discovery method(s).
+*Example JSON-LD as2:Offer payload (3)*:
+
 ```json
-    {
-      "@context": [
+{
+    "@context": [
         "https://www.w3.org/ns/activitystreams",
-        "https://purl.org/dice/ltp"
-      ],
-      "actor": {
-        "id": "https://b2share/",
-        "name": "repository.org",
-        "type": ""
-      },
-      "id": "urn:uuid:0370c0fb-bb78-4a9b-87f5-bed307a509dd",
-      "object": {
-        "id": "https://research-organisation.org/repository/dataset/201203/421/",
-        "ietf:cite-as": "https://doi.org/10.5555/12345680",
-        "type": "sorg:AboutPage",
-        "url": {
-          "id": "https://research-organisation.org/repository/dataset/201203/421/content.pdf",
-          "media-type": "application/pdf",
-          "type": [
-            "Dataset",
-            "sorg:ScholarlyObject"
-          ]
-        }
-      },
-      "origin": {
-        "id": "https://research-organisation.org/repository",
-        "inbox": "https://research-organisation.org/repository/inbox/",
-        "type": "Service"
-      },
-      "target": {
-        "id": "https://sample.com/system",
-        "inbox": "https://sample.com/system/inbox/",
-        "type": "Service"
-      },
-      "type": [
-        "Offer",
-        "ddps:ArchiveAction"
-      ]
+        {"schema": "https://schema.org/"}
+    ],
+    "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "type": "Offer",
+    "actor": {
+        "id": "https://acme.org/profile/card#us",
+        "inbox": "https://acme.org/inbox/",
+        "name": "ACME Research Institute",
+        "type": "Organization"
+    },
+    "origin": {
+        "id": "https://acme.org/system",
+        "name": "ACME Research Institute System",
+        "type": "Application"
+    },
+    "object": {
+        "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+        "type": [
+            "Document",
+            "schema:Dataset"
+        ]
+    },
+    "target": {
+        "id": "https://data.archive.xyz.net/",
+        "inbox": "https://data.archive.xyz.net/inbox/",
+        "name": "Data Archive XYZ",
+        "type": "Organization"
     }
+}
 ```
 
-4. The **Web Repository** marks the landingpage of the scholary object/dataset that a request for Long Term Archiving is pending.    
-5. The`as2:Offer`in the LDN`ldp:inbox`of the **LTP Data Archive** is picked up by the **Archival Bot**  
-6. **Archival Bot** determines if this`as2:Offer`is valid against known rules. (e.g: registered domain, etc). It will either accept(7) or reject(16) the`as2:Offer`    
-7. **Archival Bot** sends an`as2:Accept`notification to the LDN`ldp:inbox`of the <b>Web Repository</b>.  
 
-<u>*Example JSON-LD payload*</u>:
+<ol start="4">
+	<li>The <b>Web Repository</b> flags the status on the landingpage of the scholary object/dataset to &quot;LTP Request Pending&quot;.   
+	<li>OPT: The <b>Author</b> cancels the request.
+	<li>OPT: The <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo<code>as2:Undo</code>the LDN inbox<code>ldp:inbox</code>of the <b>Archival Bot</b>.
+	<li>OPT: The <b>Web Repository</b> cleares the LTP status on the landingpage, on behalf of the <b>Author</b>.
+</ol>
+
+*Example JSON-LD as2:Undo payload (6)*:
+
+
+```
+{
+    "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        {"schema": "https://schema.org/"}
+    ],
+    "id": "urn:uuid:70892B92-001E-40C8-B4E8-B70BBC334419",
+    "type": "Undo",
+    "actor": {
+        "id": "https://acme.org/profile/card#us",
+        "inbox": "https://acme.org/inbox/",
+        "name": "ACME Research Institute",
+        "type": "Organization"
+    },
+    "origin": {
+        "id": "https://acme.org/system",
+        "name": "ACME Research Institute System",
+        "type": "Application"
+    },
+    "object": {
+        "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+        "type": "Offer",
+        "actor": {
+            "id": "https://acme.org/profile/card#us",
+            "inbox": "https://acme.org/inbox/",
+            "name": "ACME Research Institute",
+            "type": "Organization"
+        },
+        "origin": {
+            "id": "https://acme.org/system",
+            "name": "ACME Research Institute System",
+            "type": "Application"
+        },
+        "object": {
+            "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+            "type": [
+                "Document",
+                "schema:Dataset"
+            ]
+        },
+        "target": {
+            "id": "https://data.archive.xyz.net/",
+            "inbox": "https://data.archive.xyz.net/inbox/",
+            "name": "Data Archive XYZ",
+            "type": "Organization"
+        }
+    },
+    "target": {
+        "id": "https://data.archive.xyz.net/",
+        "inbox": "https://data.archive.xyz.net/inbox/",
+        "name": "Data Archive XYZ",
+        "type": "Organization"
+    }
+}
+```
+
+<ol start="8">
+	<li>The <code>as2:Offer</code>in the LDN<code>ldp:inbox</code>of the <b>LTP Data Archive</b> is picked up by the <b>Archival Bot</b>  
+	<li>The <b>Archival Bot</b> checks the validity of the <code>as2:Offer</code>. It checks against known rules, like registered domain, RDF format/SHACL validation, etc. It will either accept(10) or reject(19) the<code>as2:Offer</code>   
+	<li>The <b>Archival Bot</b> sends an<code>as2:Accept</code>notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
+</ol>  
+
+*Example JSON-LD as2:Accept payload (10)*:
 
 
 ```json
 {
-  "@context": [
-    "https://www.w3.org/ns/activitystreams",
-    "https://purl.org/dice/ltp"
-  ],
-  "actor": {
-    "id": "https://b2share/",
-    "name": "Some repo",
-    "type": ""
-  }, (...)
+    "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        {"schema": "https://schema.org/"}
+    ],
+    "id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB",
+    "type": "Accept",
+    "actor": {
+        "id": "https://data.archive.xyz.net/",
+        "inbox": "https://data.archive.xyz.net/inbox/",
+        "name": "Data Archive XYZ",
+        "type": "Organization"
+    },
+    "origin": {
+        "id": "https://data.archive.xyz.net/system",
+        "name": "XYZ Archiving Department",
+        "type": "Application"
+    },
+    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "object": {
+        "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+        "type": "Offer",
+        "actor": {
+            "id": "https://acme.org/profile/card#us",
+            "inbox": "https://acme.org/inbox/",
+            "name": "ACME Research Institute",
+            "type": "Organization"
+        },
+        "origin": {
+            "id": "https://acme.org/system",
+            "name": "ACME Research Institute System",
+            "type": "Application"
+        },
+        "object": {
+            "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+            "type": [
+                "Document",
+                "schema:Dataset"
+            ]
+        },
+        "target": {
+            "id": "https://data.archive.xyz.net/",
+            "inbox": "https://data.archive.xyz.net/inbox/",
+            "name": "Data Archive XYZ",
+            "type": "Organization"
+        }
+    },
+    "target": {
+        "id": "https://acme.org/profile/card#us",
+        "inbox": "https://acme.org/inbox/",
+        "name": "ACME Research Institute",
+        "type": "Organization"
+    }
+}
 ```
 
-<ol start="8"><li>The <b>Web Repository</b> updates the status of the landingpage from request pending to Long Term Archiving in progress.    
-<li>**OPTION** Signposting; The <b>Archival Bot</b> will request the Link Set URL from the **Web Repository** by either HTTP header or HTML <head> of the landingpage URL (PID).  
-<li>The Link Set location is returned by the <b>Web Repository</b>.  
-<li>The **Archival Bot** retrieves the seriailized Link Set from the <b>Web Repository</b>.  
-<li>The **Archival Bot** retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.    
-<li>The **Archival Bot** prepares and sends all content resources to the the **LTP Data Archive**.  
-<li>**Archival Bot** sends an `as2:Announce` notification to the LDN`ldp:inbox`of the <b>Web Repository</b>.  
-<li>The <b>Web Repository</b> updates the status of the landingpage from Long Term Archiving in progress to Long Term Archived, including a link to the archive (?).    
-<li>**Archival Bot** sends an `as2:Reject` notification to the LDN `ldp:inbox` of the <b>Web Repository</b>.  
-<li>The <b>Web Repository</b> cleares the LTP status of the landingpage, because the as:Offer was not accepted by the **Archival Bot**.  
+<ol start="11">
+	<li>The <b>Web Repository</b> updates the status of the landingpage from &quot;Request Pending&quot; to &quot;Long Term Archiving in progress&quot;.    
+	<li>OPT: Signposting; The <b>Archival Bot</b> will request the Link Set URL from the <b>Web Repository</b> by either HTTP header or HTML <head> of the landingpage URL (PID).  
+	<li>The Link Set location is returned by the <b>Web Repository</b>.  
+	<li>The <b>Archival Bot</b> retrieves the seriailized Link Set from the <b>Web Repository</b>.  
+	<li>The <b>Archival Bot</b> retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.    
+	<li>The <b>Archival Bot</b> prepares and sends all content resources to the the <b>LTP Data Archive</b>.  
+	<li><b>Archival Bot</b> sends an <code>as2:Announce</code> notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
 </ol>
+
+*Example JSON-LD as2:Announce payload (17)*:
+
+
+```
+{
+    "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        {"schema": "https://schema.org/"}
+    ],
+    "id": "urn:uuid:ED0E06DA-4294-43C0-8E87-800558E4045B",
+    "type": "Announce",
+    "actor": {
+        "id": "https://data.archive.xyz.net/",
+        "inbox": "https://data.archive.xyz.net/inbox/",
+        "name": "Data Archive XYZ",
+        "type": "Organization"
+    },
+    "origin": {
+        "id": "https://data.archive.xyz.net/system",
+        "name": "XYZ Archiving Department",
+        "type": "Application"
+    },
+    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "object": {
+        "id": "urn:uuid:CF21A499-1BDD-4B59-984A-FC94CF6FBA86",
+        "type": "Relationship",
+        "subject": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+        "relationship": "https://www.iana.org/memento",
+        "object": "https://data.archive.xyz.net/data/memento/21daF1921"
+    },
+    "target": {
+        "id": "https://acme.org/profile/card#us",
+        "inbox": "https://acme.org/inbox/",
+        "name": "ACME Research Institute",
+        "type": "Organization"
+    }
+}
+```
+
+<ol start="18">
+	<li>The <b>Web Repository</b> updates the status of the landingpage from Long Term Archiving in progress to Long Term Archived, including a link to the archive (?).    
+	<li><b>Archival Bot</b> sends an <code>as2:Reject</code> notification to the LDN <code>ldp:inbox</code> of the <b>Web Repository</b>.  
+</ol>
+
+*Example JSON-LD as2:Reject payload (19)*:
+
+
+```
+{
+    "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        {"schema": "https://schema.org/"}
+    ],
+    "id": "urn:uuid:ED4CB09E-F74C-44E8-AA0D-BA74CDE0CDC7",
+    "type": "Reject",
+    "actor": {
+        "id": "https://data.archive.xyz.net/",
+        "inbox": "https://data.archive.xyz.net/inbox/",
+        "name": "Data Archive XYZ",
+        "type": "Organization"
+    },
+    "origin": {
+        "id": "https://data.archive.xyz.net/system",
+        "name": "XYZ Archiving Department",
+        "type": "Application"
+    },
+    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "object": {
+        "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+        "type": "Offer",
+        "actor": {
+            "id": "https://acme.org/profile/card#us",
+            "inbox": "https://acme.org/inbox/",
+            "name": "ACME Research Institute",
+            "type": "Organization"
+        },
+        "origin": {
+            "id": "https://acme.org/system",
+            "name": "ACME Research Institute System",
+            "type": "Application"
+        },
+        "object": {
+            "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+            "type": [
+                "Document",
+                "schema:Dataset"
+            ]
+        },
+        "target": {
+            "id": "https://data.archive.xyz.net/",
+            "inbox": "https://data.archive.xyz.net/inbox/",
+            "name": "Data Archive XYZ",
+            "type": "Organization"
+        }
+    },
+    "target": {
+        "id": "https://acme.org/profile/card#us",
+        "inbox": "https://acme.org/inbox/",
+        "name": "ACME Research Institute",
+        "type": "Organization"
+    }
+}
+```
+
+<ol start="20">
+	<li>The <b>Web Repository</b> cleares the LTP status on the landingpage, because the <code>as2:Offer</code> was not accepted by the <b>Archival Bot</b> because the business rules in (9) where not met.  
+</ol>
+
 
 ## LDN Activities
 A notification is sent by a actor to inform another actor about an activity. An Activity is some action that occurred, pertaining to a certain artefact in the network. Activities are described by the notification payload.
@@ -133,15 +349,15 @@ A notification is sent by a actor to inform another actor about an activity. An 
 Notification payloads are expressed in [activitystreams-vocabulary] and use [JSON-LD] as default syntax (other RDF syntaxes are allowed as well). A payload is uniquely identified, indicates the type of activity it is describing, and includes some descriptive metadata about the activity.
 
 ### Types of activities
-Notification payloads apply the [ActivityStreams 2.0 vocabulary](https://www.w3.org/TR/activitystreams-vocabulary). Therefore, the notification payload MUST be typed as an`as:Activity`or as one of its more specialized subtypes.  
+Notification payloads apply the [ActivityStreams 2.0 vocabulary](https://www.w3.org/TR/activitystreams-vocabulary). Therefore, the notification payload MUST be typed as an`as2:Activity`or as one of its more specialized subtypes.  
 
 |Activity Type | Context|
 |:----|:----|
-|[`as:Offer`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-offer)| (...)|
-|[`as:Accept`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-accept)| (...)|
-|[`as:Announce`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-announce)| (...)|
-|[`as:Reject`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-reject)| (...)|
-|`as:xxx`| (...)|
+|[`as2:Offer`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-offer)| (...)|
+|[`as2:Accept`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-accept)| (...)|
+|[`as2:Announce`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-announce)| (...)|
+|[`as2:Reject`](https://www.w3.org/TR/activitystreams-vocabulary#dfn-reject)| (...)|
+|`as2:xxx`| (...)|
 
 ## B2SHARE Long Term Archiving Module
 
