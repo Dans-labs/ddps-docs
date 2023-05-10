@@ -398,8 +398,7 @@ It highly recommended to take notice of these specifications for a better unders
 Acknowledgements
 ----------------
 
-!!! info
-"Aligned Projects"
+!!! info "Aligned Projects"
 
     [Event Notifications in Value-Adding Networks]{target=_blank} <br />
     [COAR Notify Protocol](https://notify.coar-repositories.org/){target=_blank}
