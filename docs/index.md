@@ -16,7 +16,7 @@ The policy template contains articles that distinguish between outsourced servic
 This file documents the functional requirements and technical specifications for a service that implements an LTP policy for B2SHARE into a CTS certified archive (outsourced), called the Digital Preservation Service (DPS).  
 It is meant as a guide on how to implement an example Long-term Preservation Service between a short to midterm data (web)repository service and a long-term preservation (LTP) archive.  
 The implementation adheres to documented community conventions for the use of W3C Linked Data Notifications (LDN) and Activity Streams 2 (AS2) to integrate repository systems with long-term (LTP) archives, in a distributed, resilient and web-native architecture.  
-The standards used, and the application profiles documented here, are implementations of the generic patterns described by [Event Notifications in Value-Adding Networks]{target=_blank}, that details a profile for using Linked Data Notifications with ActivityStreams2 payloads in value-adding networks.  
+The standards used, and the application profile documented here, are implementations of the generic patterns described by [Event Notifications in Value-Adding Networks]{target=_blank}, that details a profile for using Linked Data Notifications with ActivityStreams2 payloads in value-adding networks.  
 The the [COAR Notify Protocol](https://notify.coar-repositories.org/){target=_blank} is also strongly aligned with the [Event Notifications in Value-Adding Networks]{target=_blank} Profile and provides notification patterns that are more specific implementations of the generic patterns described by [Event Notifications in Value-Adding Networks]{target=_blank}.
 
 
@@ -50,11 +50,11 @@ Within this documentation, the Linked Data Notifications (LDN) with ActivityStre
 ## Namespaces
 Within this document, the following namespace prefix bindings are used:
 
-| Prefix 	| Namespace                               | Name                                      |
-|:--------|:----------------------------------------|:------------------------------------------|
-| `as2`   | https://www.w3.org/ns/activitystreams#  | W3C ActivityStreams 2.0                   |
-| `ldp`   | http://www.w3.org/ns/ldp#               | W3C Linked Data Platform (LDP) Vocabulary |
-| `so`    | https://schema.org/                     | Schema.org                                |
+| Prefix 	 | Namespace                               | Name                                      |
+|:---------|:----------------------------------------|:------------------------------------------|
+| `as2`    | https://www.w3.org/ns/activitystreams#  | W3C ActivityStreams 2.0                   |
+| `ldp`    | http://www.w3.org/ns/ldp#               | W3C Linked Data Platform (LDP) Vocabulary |
+| `sorg`   | https://schema.org/                     | Schema.org                                |
 
 
 Our examples LDN+AS2 payloads we use [JSON-LD] as syntax, in which we don’t explicitly write the prefixes.
@@ -97,11 +97,17 @@ each other. The notation used is not a formal one and is intended to be self-exp
 
 ## Activity Diagram Use Case #1
 Below a possible interaction / activity diagram is given for this use case. The numbers in the diagram corresponds to the nummers given in the description.
-[![](https://mermaid.ink/img/pako:eNqtVdtO20AQ_ZXRVlFAoqqgLVCrQsqFFKQIolzoi1829jjZ4uy66zWCpvn3zvpC1o6RWqnkBe-ZmTM7lz1bFqgQmcc6na2Qwniw7aYYZFqYlzE-Ydz1oBsrlWL3BLpmjRvset0lz799lh88cC34MsbUZ-Tusw0Xsv-4oi-fvet_6o-Glz6z1jwwSr8i18PR6WjgIkqHqAvw_MvFqH_mgHN8NgMVqxI_6328-HxR4FIZbMCjS_vbw0T6hnOkpJmJX2hz99npefLss91u1-n4MsWfGcoAh4KvNN_4EuiPZ0bJbLOkRPPv8tSmCDwWAQJPoZeZtSoNEq6NCETCpQGNibL4d1zClP5PBbm9HNotlcnD6GAtnngMfWUOjXiO5nzj-QSG3PDSA31ZpmUTen91ZXk9GKuVkKAkxFyGQq4SvsI2u6m9d2ogoitR5MLEQmRBmXkwQxnC0Xh4d0zkZ959FKEGKrOIRMCNIIavi-mYCPc8v8dCPpKjuaqFKwjpGFLDTZbaHtjL6DKFBPMIPiu8VGJgwKklcZVkcX54h7pV_SrN69g7LGSoDtCqHCnl90ZeZd6FKx1WlaeVSYAqBEIu1fM-MhFWtBMVx02TPELDbrDG4BFoDERISwkqyp1eC18bw9jAQ298O4Qc8qAXBJiYpvGeoKp_rZ-F0xvVWCQhN9hoF41VotVKY5q6rbqN3BEAmol2_ps5xbi57g3haCZWkvbCkM9xI4OqHtUk0TwX09ZaOifyt-v53qmFodOxTwRosVobW96c5Yb_TTS1_IGBSduiFo7lkpa-k_vZ_MNkMc-X1fE_pGq2REqV0US3LE9rQ8p3ILTdKMsTpwi3d7XpmKJl_8fpKJz-z66wE7ZBTXoRkgJtLVBKSvEaW5mhV9o5b0hNMfqO4ICrOBXsyA64ulPHK_EBV31qJq7GgCsjlVVTiMBVItfIkaPWQG2iZLGdL3dUsyxv-XVo1YN5EafWnjArTLMXGTDP6Awro1K7SqvdH8l6frQ?type=png)](https://mermaid.live/edit#pako:eNqtVdtO20AQ_ZXRVlFAoqqgLVCrQsqFFKQIolzoi1829jjZ4uy66zWCpvn3zvpC1o6RWqnkBe-ZmTM7lz1bFqgQmcc6na2Qwniw7aYYZFqYlzE-Ydz1oBsrlWL3BLpmjRvset0lz799lh88cC34MsbUZ-Tusw0Xsv-4oi-fvet_6o-Glz6z1jwwSr8i18PR6WjgIkqHqAvw_MvFqH_mgHN8NgMVqxI_6328-HxR4FIZbMCjS_vbw0T6hnOkpJmJX2hz99npefLss91u1-n4MsWfGcoAh4KvNN_4EuiPZ0bJbLOkRPPv8tSmCDwWAQJPoZeZtSoNEq6NCETCpQGNibL4d1zClP5PBbm9HNotlcnD6GAtnngMfWUOjXiO5nzj-QSG3PDSA31ZpmUTen91ZXk9GKuVkKAkxFyGQq4SvsI2u6m9d2ogoitR5MLEQmRBmXkwQxnC0Xh4d0zkZ959FKEGKrOIRMCNIIavi-mYCPc8v8dCPpKjuaqFKwjpGFLDTZbaHtjL6DKFBPMIPiu8VGJgwKklcZVkcX54h7pV_SrN69g7LGSoDtCqHCnl90ZeZd6FKx1WlaeVSYAqBEIu1fM-MhFWtBMVx02TPELDbrDG4BFoDERISwkqyp1eC18bw9jAQ298O4Qc8qAXBJiYpvGeoKp_rZ-F0xvVWCQhN9hoF41VotVKY5q6rbqN3BEAmol2_ps5xbi57g3haCZWkvbCkM9xI4OqHtUk0TwX09ZaOifyt-v53qmFodOxTwRosVobW96c5Yb_TTS1_IGBSduiFo7lkpa-k_vZ_MNkMc-X1fE_pGq2REqV0US3LE9rQ8p3ILTdKMsTpwi3d7XpmKJl_8fpKJz-z66wE7ZBTXoRkgJtLVBKSvEaW5mhV9o5b0hNMfqO4ICrOBXsyA64ulPHK_EBV31qJq7GgCsjlVVTiMBVItfIkaPWQG2iZLGdL3dUsyxv-XVo1YN5EafWnjArTLMXGTDP6Awro1K7SqvdH8l6frQ)
+[![](https://mermaid.ink/img/pako:eNqtVW1r2zAQ_iuHRkgHHaPd1nZmFPK6Fkwb8tJ98RfFvjhaHcmT5dIu5L_v5JdGdlLYYPGXWM9z95zuJD9bFqoImcc6na2Qwniw7WYY5lqYFx-fMOl60E2UyrB7Cl2zxg12ve6SF-8BKxYeuBZ8mWAWMAoP2IYL2X-M6S1g7_qf--PhVcAsm4dG6VdkNByfjQcuonSEugQvvl6O--cOOMdnM1CJqvDz3qfLL5clLpXBFjy-ss8eJtE3gldKmpn4jbb2gJ1dpM8B2-12nU4gM_yVowxxKHis-SaQQD-eGyXzzZIKLd6rVVsi8ESECDyDXm7WqiKkXBsRipRLAxpTZfEfuIQp_c8Ehb0c8pbKFGl0uBZPPIG-MockXqCFnj-fwJAbXkVgIKuybEEfrq-trge-ioUEJSHhMhIyTnmMx3hTu-_MwIq2RJlLioWIQZV5MEMZwYk_vHtP4ufe_WqFGqjNYiVCbgQpfPP3ErCY-teNJKXMDA1khps8s523W9CVcIpFcMDKKJUaGHAaRFKXVq4fVt5kNTfQ3oStfCEjdYDWTciovjfqquouQ2mx7jddlBSoLyDkUj3vM5NgLTtRSdKmFBlavMEaw0eg4YuIriKoVRH02u7G4UsMPPT82yEUkAe9MMTUtMl7gbr_jSmWQW90Y5FG3GBrXHSYUq1ijVlWj6qtcTMn3s2oN4STmYglnXhDDXzfUqn37Av5WBwLX5XnyN3lQdrvo_k-4kj6TsfefNAiXhvbv0Lihv9NNrX8iaHJjmUtA6u7V8VO7mfzj5PFvLiDTvyhVLvnUqqcjuyR23G049X1jmy7q6OTZAi3d43xT9Gq_-P4y6D_cxnYKdugJhuIyFi2FqicovzIWvegj6-z3nKQcuqOj4BrJDXsuAm4dtLEa08B11QaFNc6wHWHmtX2F3ANxiU5LnM00TGvsdgukDvqWV6MfBRZU2DeitNoT5n1m9mLDJlndI41qbKkirX7A_bDcPQ?type=png)](https://mermaid.live/edit#pako:eNqtVW1r2zAQ_iuHRkgHHaPd1nZmFPK6Fkwb8tJ98RfFvjhaHcmT5dIu5L_v5JdGdlLYYPGXWM9z95zuJD9bFqoImcc6na2Qwniw7WYY5lqYFx-fMOl60E2UyrB7Cl2zxg12ve6SF-8BKxYeuBZ8mWAWMAoP2IYL2X-M6S1g7_qf--PhVcAsm4dG6VdkNByfjQcuonSEugQvvl6O--cOOMdnM1CJqvDz3qfLL5clLpXBFjy-ss8eJtE3gldKmpn4jbb2gJ1dpM8B2-12nU4gM_yVowxxKHis-SaQQD-eGyXzzZIKLd6rVVsi8ESECDyDXm7WqiKkXBsRipRLAxpTZfEfuIQp_c8Ehb0c8pbKFGl0uBZPPIG-MockXqCFnj-fwJAbXkVgIKuybEEfrq-trge-ioUEJSHhMhIyTnmMx3hTu-_MwIq2RJlLioWIQZV5MEMZwYk_vHtP4ufe_WqFGqjNYiVCbgQpfPP3ErCY-teNJKXMDA1khps8s523W9CVcIpFcMDKKJUaGHAaRFKXVq4fVt5kNTfQ3oStfCEjdYDWTciovjfqquouQ2mx7jddlBSoLyDkUj3vM5NgLTtRSdKmFBlavMEaw0eg4YuIriKoVRH02u7G4UsMPPT82yEUkAe9MMTUtMl7gbr_jSmWQW90Y5FG3GBrXHSYUq1ijVlWj6qtcTMn3s2oN4STmYglnXhDDXzfUqn37Av5WBwLX5XnyN3lQdrvo_k-4kj6TsfefNAiXhvbv0Lihv9NNrX8iaHJjmUtA6u7V8VO7mfzj5PFvLiDTvyhVLvnUqqcjuyR23G049X1jmy7q6OTZAi3d43xT9Gq_-P4y6D_cxnYKdugJhuIyFi2FqicovzIWvegj6-z3nKQcuqOj4BrJDXsuAm4dtLEa08B11QaFNc6wHWHmtX2F3ANxiU5LnM00TGvsdgukDvqWV6MfBRZU2DeitNoT5n1m9mLDJlndI41qbKkirX7A_bDcPQ)
+
+## LDN Payloads
+
+The LDN payloads that are involved in the activity diagram above, have been composed of the specifications in both Event Notifications and COAR Notify.  
+It highly recommended to take notice of these specifications for a better understanding of the backgrounds.  
+
 
 1. The <b>Author</b> logs in into the landingpage of the dataset that it owns on the **Web Repository** (authorized user).
-2. The authorized <b>Author</b> presses an archival-button, to start a Long Term Preservation (LTP) request for this dataset.
-3. The **Web Repository** (DataNode) sends a Linked Data Notification (LDN) Offer`as2:Offer`to the LDN inbox`ldp:inbox`of the **Archival Bot**. The payload MUST hold the landingpage URL of the scholary object/dataset. All associated resources can be found by using FAIR Signposting discovery methods (12). If, for some reason, the landingpage URL/PID is not available at this point, the URL of the Link Set for this scholary object must be supplied. This way the <b>Archival Bot</b> can directly access the serialized Link Set (14) holding all Typed Links, without using Signposting discovery method(s).
+2. The authorized <b>Author</b> presses an archival-button, to start a Long Term Preservation (LTP) request for this dataset on the landingpage.
+3. The **Web Repository** (Data Node) sends a Linked Data Notification (LDN) Offer`as2:Offer`to the LDN inbox`ldp:inbox`of the **Archival Bot** (Service Node). The payload MUST hold the landingpage URL `sorg:AboutPage` of the scholary object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a `ietf:cite-as` relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).
 
 *Example JSON-LD as2:Offer payload (3)*:
 
@@ -109,51 +115,52 @@ Below a possible interaction / activity diagram is given for this use case. The 
 {
     "@context": [
         "https://www.w3.org/ns/activitystreams",
-        {"schema": "https://schema.org/"}
+        "https://purl.org/coar/notify"
     ],
     "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
     "type": "Offer",
     "actor": {
-        "id": "https://acme.org/profile/card#us",
-        "inbox": "https://acme.org/inbox/",
-        "name": "ACME Research Institute",
-        "type": "Organization"
+        "id": "https://orcid.org/0000-0003-4405-7546",
+        "name": "Authorized User",
+        "type": "Person"
     },
     "origin": {
-        "id": "https://acme.org/system",
-        "name": "ACME Research Institute System",
-        "type": "Application"
+        "id": "https://b2share.eudat.eu",
+        "name": "EUDAT B2SHARE Web Repository",
+        "inbox": "https://b2share.eudat.eu/inbox/",
+        "type": "Service"
     },
     "object": {
-        "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+        "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
+        "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
         "type": [
-            "Document",
-            "schema:Dataset"
+            "sorg:AboutPage",
+            "sorg:Dataset"
         ]
     },
     "target": {
         "id": "https://data.archive.xyz.net/",
-        "inbox": "https://data.archive.xyz.net/inbox/",
-        "name": "Data Archive XYZ",
-        "type": "Organization"
+        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     }
 }
 ```
 
 <ol start="4">
 	<li>The <b>Web Repository</b> flags the status on the landingpage of the scholary object/dataset to &quot;LTP Request Pending&quot;.   
-	<li>OPT: The <b>Author</b> cancels the request.
-	<li>OPT: The <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo<code>as2:Undo</code>the LDN inbox<code>ldp:inbox</code>of the <b>Archival Bot</b>.
-	<li>OPT: The <b>Web Repository</b> cleares the LTP status on the landingpage, on behalf of the <b>Author</b>.
+	<li>Option: The <b>Author</b> cancels the LTP request, by pressing the "Cancel LTP" button on the landing page.
+	<li>Option: In response to action (5), the <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo<code>as2:Undo</code> to the LDN inbox<code>ldp:inbox</code>of the <b>Archival Bot</b> (Service Node).
+	<li>Option: In response to action (5), the <b>Web Repository</b> cleares the LTP status/flag on the landingpage, on behalf of the <b>Author</b>.
 </ol>
 
 *Example JSON-LD as2:Undo payload (6)*:
 
-```
+```json
 {
     "@context": [
         "https://www.w3.org/ns/activitystreams",
-        {"schema": "https://schema.org/"}
+        "https://purl.org/coar/notify"
     ],
     "id": "urn:uuid:70892B92-001E-40C8-B4E8-B70BBC334419",
     "type": "Undo",
@@ -164,9 +171,9 @@ Below a possible interaction / activity diagram is given for this use case. The 
         "type": "Organization"
     },
     "origin": {
-        "id": "https://acme.org/system",
-        "name": "ACME Research Institute System",
-        "type": "Application"
+        "id": "https://b2share.eudat.eu",
+        "name": "EUDAT B2SHARE Repository System",
+        "type": "Service"
     },
     "object": {
         "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
@@ -178,29 +185,29 @@ Below a possible interaction / activity diagram is given for this use case. The 
             "type": "Organization"
         },
         "origin": {
-            "id": "https://acme.org/system",
-            "name": "ACME Research Institute System",
-            "type": "Application"
+            "id": "https://b2share.eudat.eu",
+            "name": "EUDAT B2SHARE Repository System",
+            "type": "Service"
         },
         "object": {
-            "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+            "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
             "type": [
-                "Document",
-                "schema:Dataset"
+                "sorg:AboutPage",
+                "sorg:Dataset"
             ]
         },
         "target": {
-            "id": "https://data.archive.xyz.net/",
-            "inbox": "https://data.archive.xyz.net/inbox/",
-            "name": "Data Archive XYZ",
-            "type": "Organization"
+            "id": "https://archivebot.data-stations.nl/",
+            "inbox": "https://archivebot.data-stations.nl/inbox/",
+            "name": "DANS Archival Bot",
+            "type": "Service"
         }
     },
     "target": {
-        "id": "https://data.archive.xyz.net/",
-        "inbox": "https://data.archive.xyz.net/inbox/",
-        "name": "Data Archive XYZ",
-        "type": "Organization"
+        "id": "https://archivebot.data-stations.nl/",
+        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     }
 }
 ```
@@ -217,15 +224,15 @@ Below a possible interaction / activity diagram is given for this use case. The 
 {
     "@context": [
         "https://www.w3.org/ns/activitystreams",
-        {"schema": "https://schema.org/"}
+        "https://purl.org/coar/notify"
     ],
     "id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB",
     "type": "Accept",
     "actor": {
-        "id": "https://data.archive.xyz.net/",
-        "inbox": "https://data.archive.xyz.net/inbox/",
-        "name": "Data Archive XYZ",
-        "type": "Organization"
+        "id": "https://archivebot.data-stations.nl/",
+        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     },
     "origin": {
         "id": "https://data.archive.xyz.net/system",
@@ -233,7 +240,7 @@ Below a possible interaction / activity diagram is given for this use case. The 
         "type": "Application"
     },
     "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
-    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
         "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
         "type": "Offer",
@@ -244,22 +251,22 @@ Below a possible interaction / activity diagram is given for this use case. The 
             "type": "Organization"
         },
         "origin": {
-            "id": "https://acme.org/system",
-            "name": "ACME Research Institute System",
-            "type": "Application"
+            "id": "https://b2share.eudat.eu",
+            "name": "EUDAT B2SHARE Repository System",
+            "type": "Service"
         },
         "object": {
-            "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+            "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
             "type": [
-                "Document",
-                "schema:Dataset"
+                "sorg:AboutPage",
+                "sorg:Dataset"
             ]
         },
         "target": {
-            "id": "https://data.archive.xyz.net/",
-            "inbox": "https://data.archive.xyz.net/inbox/",
-            "name": "Data Archive XYZ",
-            "type": "Organization"
+            "id": "https://archivebot.data-stations.nl/",
+            "inbox": "https://archivebot.data-stations.nl/inbox/",
+            "name": "DANS Archival Bot",
+            "type": "Service"
         }
     },
     "target": {
@@ -272,7 +279,7 @@ Below a possible interaction / activity diagram is given for this use case. The 
 ```
 <ol start="11">
 	<li>The <b>Web Repository</b> updates the status of the landingpage from &quot;Request Pending&quot; to &quot;Long Term Archiving in progress&quot;.    
-	<li>OPT: Signposting; The <b>Archival Bot</b> will request the Link Set URL from the <b>Web Repository</b> by either HTTP header or HTML <head> of the landingpage URL (PID).  
+	<li>The <b>Archival Bot</b> will retrieve the Link Set URL from the <b>Web Repository</b> landing page, by either HTTP header or HTML <head> of the landingpage URL, as is described by Signposting.  
 	<li>The Link Set location is returned by the <b>Web Repository</b>.  
 	<li>The <b>Archival Bot</b> retrieves the seriailized Link Set from the <b>Web Repository</b>.  
 	<li>The <b>Archival Bot</b> retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.    
@@ -282,19 +289,19 @@ Below a possible interaction / activity diagram is given for this use case. The 
 
 *Example JSON-LD as2:Announce payload (17)*:
 
-```
+```json
 {
     "@context": [
         "https://www.w3.org/ns/activitystreams",
-        {"schema": "https://schema.org/"}
+        "https://purl.org/coar/notify"
     ],
     "id": "urn:uuid:ED0E06DA-4294-43C0-8E87-800558E4045B",
     "type": "Announce",
     "actor": {
-        "id": "https://data.archive.xyz.net/",
-        "inbox": "https://data.archive.xyz.net/inbox/",
-        "name": "Data Archive XYZ",
-        "type": "Organization"
+        "id": "https://archivebot.data-stations.nl/",
+        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     },
     "origin": {
         "id": "https://data.archive.xyz.net/system",
@@ -302,11 +309,11 @@ Below a possible interaction / activity diagram is given for this use case. The 
         "type": "Application"
     },
     "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
-    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
         "id": "urn:uuid:CF21A499-1BDD-4B59-984A-FC94CF6FBA86",
         "type": "Relationship",
-        "subject": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+        "subject": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
         "relationship": "https://www.iana.org/memento",
         "object": "https://data.archive.xyz.net/data/memento/21daF1921"
     },
@@ -314,7 +321,7 @@ Below a possible interaction / activity diagram is given for this use case. The 
         "id": "https://acme.org/profile/card#us",
         "inbox": "https://acme.org/inbox/",
         "name": "ACME Research Institute",
-        "type": "Organization"
+        "type": "Service"
     }
 }
 ```
@@ -326,19 +333,19 @@ Below a possible interaction / activity diagram is given for this use case. The 
 
 *Example JSON-LD as2:Reject payload (19)*:
 
-```
+```json
 {
     "@context": [
         "https://www.w3.org/ns/activitystreams",
-        {"schema": "https://schema.org/"}
+        "https://purl.org/coar/notify"
     ],
     "id": "urn:uuid:ED4CB09E-F74C-44E8-AA0D-BA74CDE0CDC7",
     "type": "Reject",
     "actor": {
-        "id": "https://data.archive.xyz.net/",
-        "inbox": "https://data.archive.xyz.net/inbox/",
-        "name": "Data Archive XYZ",
-        "type": "Organization"
+        "id": "https://archivebot.data-stations.nl/",
+        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     },
     "origin": {
         "id": "https://data.archive.xyz.net/system",
@@ -346,7 +353,7 @@ Below a possible interaction / activity diagram is given for this use case. The 
         "type": "Application"
     },
     "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
-    "context": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+    "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
         "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
         "type": "Offer",
@@ -357,22 +364,22 @@ Below a possible interaction / activity diagram is given for this use case. The 
             "type": "Organization"
         },
         "origin": {
-            "id": "https://acme.org/system",
-            "name": "ACME Research Institute System",
-            "type": "Application"
+            "id": "https://b2share.eudat.eu",
+            "name": "EUDAT B2SHARE Repository System",
+            "type": "Service"
         },
         "object": {
-            "id": "http://acme.org/artifacts/alice/data-set-2022-01-19.zip",
+            "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
             "type": [
-                "Document",
-                "schema:Dataset"
+                "sorg:AboutPage",
+                "sorg:Dataset"
             ]
         },
         "target": {
-            "id": "https://data.archive.xyz.net/",
-            "inbox": "https://data.archive.xyz.net/inbox/",
-            "name": "Data Archive XYZ",
-            "type": "Organization"
+            "id": "https://archivebot.data-stations.nl/",
+            "inbox": "https://archivebot.data-stations.nl/inbox/",
+            "name": "DANS Archival Bot",
+            "type": "Service"
         }
     },
     "target": {
