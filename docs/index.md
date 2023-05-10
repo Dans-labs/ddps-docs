@@ -339,7 +339,7 @@ In this payload, blaat, blaat,,,
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": { // ABUNDANCY? Leave out?
+    "origin": { // ABUNDANCY? Leave this out?
         "id": "https://archivalbot.data-stations.nl/",
         "inbox": "https://archivalbot.data-stations.nl/inbox/",
         "name": "DANS Archival Bot",
