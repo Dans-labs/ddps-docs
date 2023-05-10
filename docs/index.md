@@ -50,11 +50,12 @@ Within this documentation, the Linked Data Notifications (LDN) with ActivityStre
 ## Namespaces
 Within this document, the following namespace prefix bindings are used:
 
-| Prefix 	 | Namespace                               | Name                                      |
-|:---------|:----------------------------------------|:------------------------------------------|
-| `as2`    | https://www.w3.org/ns/activitystreams#  | W3C ActivityStreams 2.0                   |
-| `ldp`    | http://www.w3.org/ns/ldp#               | W3C Linked Data Platform (LDP) Vocabulary |
-| `sorg`   | https://schema.org/                     | Schema.org                                |
+| Prefix | Namespace                               | Name                                                         |
+|:-------|:----------------------------------------|:-------------------------------------------------------------|
+| `as`   | https://www.w3.org/ns/activitystreams#  | W3C ActivityStreams 2.0                                      |
+| `ldp`  | http://www.w3.org/ns/ldp#               | W3C Linked Data Platform (LDP) Vocabulary                    |
+| `sorg` | https://schema.org/                     | Schema.org                                                   |
+| `ietf` |http://www.iana.org/assignments/relation/| The Internet Engineering Task Force (IETF)                   |
 
 
 Our examples LDN+AS2 payloads we use [JSON-LD] as syntax, in which we don’t explicitly write the prefixes.
@@ -101,15 +102,26 @@ Below a possible interaction / activity diagram is given for this use case. The 
 
 ## LDN Payloads
 
-The LDN payloads that are involved in the activity diagram above, have been composed of the specifications in both Event Notifications and COAR Notify.  
-It highly recommended to take notice of these specifications for a better understanding of the backgrounds.  
+The LDN payloads that are involved in the activity diagram above, have been composed of the specifications in both Event Notifications and COAR Notify.   
+For a profound understanding of this application profile one should also look into these specifications.
+Before each sample payload, the main properties and their requirements are discussed. 
+Notice that all payloads include the [COAR Notify context file](https://notify.coar-repositories.org/schema/notify.json){target=_blank} (@context). This context file defines commonly used namespaces in this profile as listed in table 1, and also includes the COAR Notify vocabulary. 
+The https://www.w3.org/ns/activitystreams context file also includes namespace prefixes used in the examples.
 
 
 1. The <b>Author</b> logs in into the landingpage of the dataset that it owns on the **Web Repository** (authorized user).
 2. The authorized <b>Author</b> presses an archival-button, to start a Long Term Preservation (LTP) request for this dataset on the landingpage.
-3. The **Web Repository** (Data Node) sends a Linked Data Notification (LDN) Offer`as2:Offer`to the LDN inbox`ldp:inbox`of the **Archival Bot** (Service Node). The payload MUST hold the landingpage URL `sorg:AboutPage` of the scholary object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a `ietf:cite-as` relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).
+3. The **Web Repository** (Data Node) sends a Linked Data Notification (LDN) Offer`as:Offer`to the LDN inbox`ldp:inbox`of the **Archival Bot** (Service Node). The payload MUST hold the landingpage URL `sorg:AboutPage` of the scholary object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a `ietf:cite-as` relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).
 
-*Example JSON-LD as2:Offer payload (3)*:
+*Example JSON-LD as:Offer payload (3)*:  
+In this example, the request for an LTP archival request is initated by the authorized author, 'Some Author' (identified in the payload as the actor). The origin identifies the system that sends the message on behalf of the actor.  
+TODO: SOME WORDS about the json-ld @id value and @type.  
+
+| Requirements | Properties                      |
+|:-------------|:--------------------------------|
+| Required     | @id, @type, as:actor, as:object |
+| Optional     | as:origin, as:target            |
+
 
 ```json
 {
@@ -117,11 +129,11 @@ It highly recommended to take notice of these specifications for a better unders
         "https://www.w3.org/ns/activitystreams",
         "https://purl.org/coar/notify"
     ],
-    "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "id": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "type": "Offer",
     "actor": {
         "id": "https://orcid.org/0000-0003-4405-7546",
-        "name": "Authorized User",
+        "name": "Some Author",
         "type": "Person"
     },
     "origin": {
@@ -139,8 +151,8 @@ It highly recommended to take notice of these specifications for a better unders
         ]
     },
     "target": {
-        "id": "https://data.archive.xyz.net/",
-        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
         "name": "DANS Archival Bot",
         "type": "Service"
     }
@@ -150,11 +162,18 @@ It highly recommended to take notice of these specifications for a better unders
 <ol start="4">
 	<li>The <b>Web Repository</b> flags the status on the landingpage of the scholary object/dataset to &quot;LTP Request Pending&quot;.   
 	<li>Option: The <b>Author</b> cancels the LTP request, by pressing the "Cancel LTP" button on the landing page.
-	<li>Option: In response to action (5), the <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo<code>as2:Undo</code> to the LDN inbox<code>ldp:inbox</code>of the <b>Archival Bot</b> (Service Node).
+	<li>Option: In response to action (5), the <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo<code>as:Undo</code> to the LDN inbox<code>ldp:inbox</code>of the <b>Archival Bot</b> (Service Node).
 	<li>Option: In response to action (5), the <b>Web Repository</b> cleares the LTP status/flag on the landingpage, on behalf of the <b>Author</b>.
 </ol>
 
-*Example JSON-LD as2:Undo payload (6)*:
+*Example JSON-LD as:Undo payload (6)*:
+In this payload, blaat, blaat,,,
+
+| Requirements | Properties                      |
+|:-------------|:--------------------------------|
+| Required     | @id, @type, as:actor, as:object |
+| Optional     | as:origin, as:target            |
+
 
 ```json
 {
@@ -162,50 +181,51 @@ It highly recommended to take notice of these specifications for a better unders
         "https://www.w3.org/ns/activitystreams",
         "https://purl.org/coar/notify"
     ],
-    "id": "urn:uuid:70892B92-001E-40C8-B4E8-B70BBC334419",
+    "id": "urn:uuid:82eaace6-3bf3-4b8b-b168-15d1a46fb668",
     "type": "Undo",
     "actor": {
-        "id": "https://acme.org/profile/card#us",
-        "inbox": "https://acme.org/inbox/",
-        "name": "ACME Research Institute",
-        "type": "Organization"
+        "id": "https://orcid.org/0000-0003-4405-7546",
+        "name": "Some Author",
+        "type": "Person"
     },
     "origin": {
         "id": "https://b2share.eudat.eu",
-        "name": "EUDAT B2SHARE Repository System",
+        "name": "EUDAT B2SHARE Web Repository",
+        "inbox": "https://b2share.eudat.eu/inbox/",
         "type": "Service"
     },
     "object": {
-        "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+        "id": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
         "type": "Offer",
         "actor": {
-            "id": "https://acme.org/profile/card#us",
-            "inbox": "https://acme.org/inbox/",
-            "name": "ACME Research Institute",
-            "type": "Organization"
+            "id": "https://orcid.org/0000-0003-4405-7546",
+            "name": "Some Author",
+            "type": "Person"
         },
         "origin": {
             "id": "https://b2share.eudat.eu",
-            "name": "EUDAT B2SHARE Repository System",
+            "name": "EUDAT B2SHARE Web Repository",
+            "inbox": "https://b2share.eudat.eu/inbox/",
             "type": "Service"
         },
         "object": {
             "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
+            "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
             "type": [
                 "sorg:AboutPage",
                 "sorg:Dataset"
             ]
         },
         "target": {
-            "id": "https://archivebot.data-stations.nl/",
-            "inbox": "https://archivebot.data-stations.nl/inbox/",
+            "id": "https://archivalbot.data-stations.nl/",
+            "inbox": "https://archivalbot.data-stations.nl/inbox/",
             "name": "DANS Archival Bot",
             "type": "Service"
         }
     },
     "target": {
-        "id": "https://archivebot.data-stations.nl/",
-        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
         "name": "DANS Archival Bot",
         "type": "Service"
     }
@@ -213,12 +233,19 @@ It highly recommended to take notice of these specifications for a better unders
 ```
 
 <ol start="8">
-	<li>The <code>as2:Offer</code>in the LDN<code>ldp:inbox</code>of the <b>LTP Data Archive</b> is picked up by the <b>Archival Bot</b>  
-	<li>The <b>Archival Bot</b> checks the validity of the <code>as2:Offer</code>. It checks against known rules, like registered domain, RDF format/SHACL validation, etc. It will either accept(10) or reject(19) the<code>as2:Offer</code>   
-	<li>The <b>Archival Bot</b> sends an<code>as2:Accept</code>notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
+	<li>The <code>as:Offer</code>in the LDN<code>ldp:inbox</code>of the <b>LTP Data Archive</b> is picked up by the <b>Archival Bot</b>  
+	<li>The <b>Archival Bot</b> checks the validity of the <code>as:Offer</code>. It checks against known rules, like registered domain, RDF format/SHACL validation, etc. It will either accept(10) or reject(19) the<code>as:Offer</code>   
+	<li>The <b>Archival Bot</b> sends an<code>as:Accept</code>notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
 </ol>  
 
-*Example JSON-LD as2:Accept payload (10)*:
+*Example JSON-LD as:Accept payload (10)*:
+
+| Requirements | Properties                      |
+|:-------------|:--------------------------------|
+| Required     | @id, @type, as:actor, as:object |
+| Recommended  | as:context, as:inReplyTo        |
+| Optional     | as:origin, as:target            |
+
 
 ```json
 {
@@ -226,54 +253,56 @@ It highly recommended to take notice of these specifications for a better unders
         "https://www.w3.org/ns/activitystreams",
         "https://purl.org/coar/notify"
     ],
-    "id": "urn:uuid:9C0ED771-B7F3-4A50-8A92-72DF63215BCB",
+    "id": "urn:uuid:0cd58f07-69aa-4dd3-bc19-7b7de0f3550a",
     "type": "Accept",
     "actor": {
-        "id": "https://archivebot.data-stations.nl/",
-        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": {
-        "id": "https://data.archive.xyz.net/system",
-        "name": "XYZ Archiving Department",
-        "type": "Application"
+    "origin": { // ABUNDANCY? Leave out?
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     },
-    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "inReplyTo": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
-        "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+        "id": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
         "type": "Offer",
         "actor": {
-            "id": "https://acme.org/profile/card#us",
-            "inbox": "https://acme.org/inbox/",
-            "name": "ACME Research Institute",
-            "type": "Organization"
+            "id": "https://orcid.org/0000-0003-4405-7546",
+            "name": "Some Author",
+            "type": "Person"
         },
         "origin": {
             "id": "https://b2share.eudat.eu",
-            "name": "EUDAT B2SHARE Repository System",
+            "name": "EUDAT B2SHARE Web Repository",
+            "inbox": "https://b2share.eudat.eu/inbox/",
             "type": "Service"
         },
         "object": {
             "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
+            "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
             "type": [
                 "sorg:AboutPage",
                 "sorg:Dataset"
             ]
         },
         "target": {
-            "id": "https://archivebot.data-stations.nl/",
-            "inbox": "https://archivebot.data-stations.nl/inbox/",
+            "id": "https://archivalbot.data-stations.nl/",
+            "inbox": "https://archivalbot.data-stations.nl/inbox/",
             "name": "DANS Archival Bot",
             "type": "Service"
         }
     },
     "target": {
-        "id": "https://acme.org/profile/card#us",
-        "inbox": "https://acme.org/inbox/",
-        "name": "ACME Research Institute",
-        "type": "Organization"
+        "id": "https://b2share.eudat.eu",
+        "name": "EUDAT B2SHARE Web Repository",
+        "inbox": "https://b2share.eudat.eu/inbox/",
+        "type": "Service"
     }
 }
 ```
@@ -284,10 +313,17 @@ It highly recommended to take notice of these specifications for a better unders
 	<li>The <b>Archival Bot</b> retrieves the seriailized Link Set from the <b>Web Repository</b>.  
 	<li>The <b>Archival Bot</b> retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.    
 	<li>The <b>Archival Bot</b> prepares and sends all content resources to the the <b>LTP Data Archive</b>.  
-	<li><b>Archival Bot</b> sends an <code>as2:Announce</code> notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
+	<li><b>Archival Bot</b> sends an <code>as:Announce</code> notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
 </ol>
 
-*Example JSON-LD as2:Announce payload (17)*:
+*Example JSON-LD as:Announce payload (17)*:
+
+| Requirements | Properties                                    |
+|:-------------|:----------------------------------------------|
+| Required     | @id, @type, as:actor, as:object, as:inReplyTo |
+| Recommended  | as:context                                    |
+| Optional     | as:origin, as:target                          |
+
 
 ```json
 {
@@ -295,32 +331,33 @@ It highly recommended to take notice of these specifications for a better unders
         "https://www.w3.org/ns/activitystreams",
         "https://purl.org/coar/notify"
     ],
-    "id": "urn:uuid:ED0E06DA-4294-43C0-8E87-800558E4045B",
+    "id": "urn:uuid:4a6b8761-3365-4379-a2cf-1fb012f1c2d8",
     "type": "Announce",
     "actor": {
-        "id": "https://archivebot.data-stations.nl/",
-        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": {
-        "id": "https://data.archive.xyz.net/system",
-        "name": "XYZ Archiving Department",
-        "type": "Application"
+    "origin": { // ABUNDANCY? Leave out?
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     },
-    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "inReplyTo": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
         "id": "urn:uuid:CF21A499-1BDD-4B59-984A-FC94CF6FBA86",
         "type": "Relationship",
         "subject": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
-        "relationship": "https://www.iana.org/memento",
-        "object": "https://data.archive.xyz.net/data/memento/21daF1921"
+        "relationship": "http://www.iana.org/assignments/relation/archives", //TODO: is this the right link relation?
+        "object": ["https://dans.knaw.nl/dd-vault-catalog/catalognumber123456", "https://www.persistent-identifier.nl/urn:nbn:nl:ui:13-r6a-812"] //TODO: Can we also relate to a PID?
     },
     "target": {
-        "id": "https://acme.org/profile/card#us",
-        "inbox": "https://acme.org/inbox/",
-        "name": "ACME Research Institute",
+        "id": "https://b2share.eudat.eu",
+        "name": "EUDAT B2SHARE Web Repository",
+        "inbox": "https://b2share.eudat.eu/inbox/",
         "type": "Service"
     }
 }
@@ -328,10 +365,17 @@ It highly recommended to take notice of these specifications for a better unders
 
 <ol start="18">
 	<li>The <b>Web Repository</b> updates the status of the landingpage from Long Term Archiving in progress to Long Term Archived, including a link to the archive (?).    
-	<li><b>Archival Bot</b> sends an <code>as2:Reject</code> notification to the LDN <code>ldp:inbox</code> of the <b>Web Repository</b>.  
+	<li><b>Archival Bot</b> sends an <code>as:Reject</code> notification to the LDN <code>ldp:inbox</code> of the <b>Web Repository</b>.  
 </ol>
 
-*Example JSON-LD as2:Reject payload (19)*:
+*Example JSON-LD as:Reject payload (19)*:
+
+
+| Requirements | Properties                        |
+|:-------------|:----------------------------------|
+| Required     | @id, @type, as:actor, as:object   |
+| Recommended  | as:context, as:inReplyTo          |
+| Optional     | as:origin, as:target              |
 
 ```json
 {
@@ -339,59 +383,59 @@ It highly recommended to take notice of these specifications for a better unders
         "https://www.w3.org/ns/activitystreams",
         "https://purl.org/coar/notify"
     ],
-    "id": "urn:uuid:ED4CB09E-F74C-44E8-AA0D-BA74CDE0CDC7",
+    "id": "urn:uuid:2a74a606-42c8-4e26-88b9-0f14e7b79d82",
     "type": "Reject",
     "actor": {
-        "id": "https://archivebot.data-stations.nl/",
-        "inbox": "https://archivebot.data-stations.nl/inbox/",
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": {
-        "id": "https://data.archive.xyz.net/system",
-        "name": "XYZ Archiving Department",
-        "type": "Application"
+    "origin": { // ABUNDANCY? Leave out?
+        "id": "https://archivalbot.data-stations.nl/",
+        "inbox": "https://archivalbot.data-stations.nl/inbox/",
+        "name": "DANS Archival Bot",
+        "type": "Service"
     },
-    "inReplyTo": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+    "inReplyTo": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
-        "id": "urn:uuid:6E5FAF88-A7F1-47A4-B087-77345EBFF495",
+        "id": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
         "type": "Offer",
         "actor": {
-            "id": "https://acme.org/profile/card#us",
-            "inbox": "https://acme.org/inbox/",
-            "name": "ACME Research Institute",
-            "type": "Organization"
+            "id": "https://orcid.org/0000-0003-4405-7546",
+            "name": "Some Author",
+            "type": "Person"
         },
         "origin": {
             "id": "https://b2share.eudat.eu",
-            "name": "EUDAT B2SHARE Repository System",
+            "name": "EUDAT B2SHARE Web Repository",
+            "inbox": "https://b2share.eudat.eu/inbox/",
             "type": "Service"
         },
         "object": {
             "id": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
+            "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
             "type": [
                 "sorg:AboutPage",
                 "sorg:Dataset"
             ]
         },
         "target": {
-            "id": "https://archivebot.data-stations.nl/",
-            "inbox": "https://archivebot.data-stations.nl/inbox/",
+            "id": "https://archivalbot.data-stations.nl/",
+            "inbox": "https://archivalbot.data-stations.nl/inbox/",
             "name": "DANS Archival Bot",
             "type": "Service"
         }
     },
-    "target": {
-        "id": "https://acme.org/profile/card#us",
-        "inbox": "https://acme.org/inbox/",
-        "name": "ACME Research Institute",
-        "type": "Organization"
-    }
+        "id": "https://b2share.eudat.eu",
+        "name": "EUDAT B2SHARE Web Repository",
+        "inbox": "https://b2share.eudat.eu/inbox/",
+        "type": "Service"
 }
 ```
 <ol start="20">
-	<li>The <b>Web Repository</b> cleares the LTP status on the landingpage, because the <code>as2:Offer</code> was not accepted by the <b>Archival Bot</b> because the business rules in (9) where not met.  
+	<li>The <b>Web Repository</b> cleares the LTP status on the landingpage, because the <code>as:Offer</code> was not accepted by the <b>Archival Bot</b> because the business rules in (9) where not met.  
 </ol>
 
 
