@@ -121,7 +121,8 @@ The [activitystreams context file](https://www.w3.org/ns/activitystreams){target
 3. The **Web Repository** (Data Node) sends a Linked Data Notification (LDN) Offer `as:Offer` to the LDN inbox `ldp:inbox` of the **Archival Bot** (Service Node). The payload MUST hold the landingpage URL `sorg:AboutPage` of the scholary object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a `ietf:cite-as` relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).
 
 #### *as:Offer (3)*:  
-In this example, the request for an LTP archival request is initated by the authorized author, 'Some Author' (identified in the payload as the actor). The origin identifies the system that sends the message on behalf of the actor.   
+In this example, the request for an LTP archival request is initated by the authorized author, 'Some Author' (identified in the payload as the actor). The origin identifies the system that sends the message on behalf of the actor.  
+From the Event Notifications specification it is mandatory to supply at least one AS2 core type, which is `as:Document`.
 
 | Requirements | Properties                              |
 |:-------------|:----------------------------------------|
@@ -153,7 +154,8 @@ In this example, the request for an LTP archival request is initated by the auth
         "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
         "type": [
             "sorg:AboutPage",
-            "sorg:Dataset"
+            "sorg:Dataset",
+            "Document"
         ]
     },
     "target": {
@@ -219,7 +221,8 @@ In this payload, the as:object holds the original as:Offer message that needs to
             "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
             "type": [
                 "sorg:AboutPage",
-                "sorg:Dataset"
+                "sorg:Dataset",
+                "Document"
             ]
         },
         "target": {
@@ -269,12 +272,6 @@ This payload, the as:object holds the original as:Offer message that is accepted
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": { // superfluous? Leave out?
-        "id": "https://archivalbot.data-stations.nl/",
-        "inbox": "https://archivalbot.data-stations.nl/inbox/",
-        "name": "DANS Archival Bot",
-        "type": "Service"
-    },
     "inReplyTo": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
@@ -296,7 +293,8 @@ This payload, the as:object holds the original as:Offer message that is accepted
             "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
             "type": [
                 "sorg:AboutPage",
-                "sorg:Dataset"
+                "sorg:Dataset",
+                "Document"
             ]
         },
         "target": {
@@ -326,7 +324,7 @@ This payload, the as:object holds the original as:Offer message that is accepted
 
 #### *as:Announce (17)*:
 
-In this payload, the as:object announces the creation of the archived artefact.
+In this payload, the as:object announces the creation of the archived artefact, by indicating a ["memento"](https://www.iana.org/assignments/link-relations/link-relations.xhtml){target=_blank} link relation between the landingpage and the archived artefact.
 
 | Requirements | Properties                                               |
 |:-------------|:---------------------------------------------------------|
@@ -349,20 +347,14 @@ In this payload, the as:object announces the creation of the archived artefact.
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": { // superfluous? Leave this out?
-        "id": "https://archivalbot.data-stations.nl/",
-        "inbox": "https://archivalbot.data-stations.nl/inbox/",
-        "name": "DANS Archival Bot",
-        "type": "Service"
-    },
     "inReplyTo": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
         "id": "urn:uuid:CF21A499-1BDD-4B59-984A-FC94CF6FBA86",
         "type": "Relationship",
         "subject": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
-        "relationship": "http://www.iana.org/assignments/relation/archives", //TODO: is this the right link relation?
-        "object": ["https://dans.knaw.nl/dd-vault-catalog/catalognumber123456", "https://www.persistent-identifier.nl/urn:nbn:nl:ui:13-r6a-812"] //TODO: Can we also relate to a PID?
+        "relationship": "http://www.iana.org/assignments/relation/memento",
+        "object": "https://dans.knaw.nl/dd-vault-catalog/catalognumber123456"
     },
     "target": {
         "id": "https://b2share.eudat.eu",
@@ -402,12 +394,6 @@ This payload, the as:object holds the original as:Offer message that is rejected
         "name": "DANS Archival Bot",
         "type": "Service"
     },
-    "origin": { // superfluous? Leave out?
-        "id": "https://archivalbot.data-stations.nl/",
-        "inbox": "https://archivalbot.data-stations.nl/inbox/",
-        "name": "DANS Archival Bot",
-        "type": "Service"
-    },
     "inReplyTo": "urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003",
     "context": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
     "object": {
@@ -429,7 +415,8 @@ This payload, the as:object holds the original as:Offer message that is rejected
             "ietf:cite-as": "https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1",
             "type": [
                 "sorg:AboutPage",
-                "sorg:Dataset"
+                "sorg:Dataset",
+                "Document"
             ]
         },
         "target": {
