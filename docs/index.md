@@ -1,16 +1,18 @@
 Digital Preservation Service (DPS)
 ========================================
 
-!!! warning "Living Document (WIP)"
+!!! note "Living Document (WIP), 16 May 2023"
 
-    This document is currently **under development**, which means **"Work in Progress"**.  
-    Don’t cite this document other than as work in progress.  
-    It is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.
+    This work is carried out in the context of the [DICE project]{target="_blank"} (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207. <br />
+    It is developed by Task 4.3: "Long Term Preservation", as part of the working package 4 (WP4): "Integration with other services & platforms", and published in the joint WP4 Deliverable: "D4.3 Final integration with other services & platforms".
+
+**This version:**  
+    [https://dans-labs.github.io/ddps-docs/](https://dans-labs.github.io/ddps-docs/) 
 
 
 Introduction
 ------------
-Within the DICE project, task 4.3 created a Long Term Preservation (LTP) template and accompanying guidance that data services and repositories can use to develop their own LTP policy.
+Within the DICE project, task 4.3 created a Long Term Preservation (LTP) template and accompanying guidance that data services and repositories can use to formulate their own LTP policy.
 The LTP policy should clarify to the users what is or can be guaranteed by the service, for how long and by whom.
 The policy template contains articles that distinguish between outsourced services and services hosted in-house.  
 This file documents the functional requirements and technical specifications for a service that implements such an LTP policy in which the archive is outsourced; the Digital Preservation Service (DPS).  
@@ -41,7 +43,7 @@ Interactions among Nodes (Service Nodes and Data Nodes) are necessarily asynchro
 Pushing any data at any moment to an archive might cause resource problems at the server side.
 Therefore, it is push-oriented, with only the relevant Nodes being updated about new information as it becomes available.
 ###### Lightweight
-This proposal is lightweight. It does take relatively little resources to implement, both from the client as from the server side.
+This proposal is lightweight. It does take relatively little compute resources to implement, both from the client as from the server side.
 ###### Multi-purpose
 The LDN+AS2 notifications approach can also be used for other purposes with the same investment. For example the peer reviewing service [COAR Notify](https://notify.coar-repositories.org/){target=_blank}, which is also strongly aligned with the [Event Notifications in Value-Adding Networks]{target=_blank} Profile.
 ###### Open Web Standards
@@ -441,7 +443,7 @@ Acknowledgements
 
 !!! info "Aligned Projects"
 
-    [Event Notifications in Value-Adding Networks]{target=_blank} <br />
+    [Event Notifications in Value-Adding Networks]{target=_blank} (including feedback on this docucument)<br />
     [COAR Notify Protocol](https://notify.coar-repositories.org/){target=_blank}
 
 !!! info "Data Infrastructure Capacities for EOSC"

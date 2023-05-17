@@ -2,7 +2,7 @@ site_name: Digital Preservation Service
 # site_url: https://example.com/
 
 repo_name: Digital Preservation Service
-repo_url: https://github.com/Dans-labs/ddps-docs
+repo_url: https://github.com/Dans-labs/ddps-docs/issues
 
 dev_addr: "127.0.0.1:8080"
 
