@@ -57,13 +57,13 @@ Below is a list of the open web standards that will be used for the core impleme
 W3C [Linked Data Notification](https://www.w3.org/TR/ldn/){target=_blank} (LDN) is an HTTP-based notification (push) protocol. It will be used for repository/archive communication. 
 #### Activity Streams 2.0
 W3C [Activity Streams 2](https://www.w3.org/TR/activitystreams-core/){target=_blank} (AS2) provides a foundational vocabulary for messaging about activities that involve web resources. A message profile will be used for LDN notifications payload exchanged by repositories and archives.  
-Within this documentation, the Linked Data Notifications (LDN) with ActivityStreams2 (AS2) payloads will be reffered to as: 'LDN+AS2 notifications'.  
+Within this documentation, the Linked Data Notifications (LDN) with ActivityStreams2 (AS2) payloads will be referred to as: 'LDN+AS2 notifications'.  
 The notification payloads should use JSON-LD as default syntax, but other RDF syntaxes may be used.
 #### Signposting
 [Signposting]{target=_blank} is a REST/HATEOAS “follow your nose” (navigational) approach to make the scholarly web more friendly to machines; it leverages IETF RFCs and IANA-registered link relation types. Typed links (HTTP Link header and/or HTML <link>) are used to allow machines to uniformly navigate scholarly artefacts irrespective of the repository they reside in. The [FAIR Signposting Profile](https://signposting.org/FAIR/){target=_blank} is a lightweight, yet powerful approach to increase the FAIRness of scholarly objects. It will be used by repositories as a means to allow archives to determine which web resources need to be retrieved in response to an on-demand archiving request.
 
 
-## Namespaces
+## Namespaces used
 Within this document, the following namespace prefix bindings are used:
 
 | Prefix | Namespace                               | Name                                                         |
@@ -82,16 +82,16 @@ In our example LDN+AS2 notifications we use JSON-LD as syntax, in which we don�
 ##### Web Repository
 This is the short- to midterm repository system. In the DPS this repository system is used for depositing, storing and disseminating datasets / digital objects.  
 The **Web Repository** must support Signposting and have an LDN inbox for handling LDN+AS2 notifications.   
-In the Event Notifications in Value-Adding Networks specification, this is also refered to as the Data Node. 
+In the Event Notifications in Value-Adding Networks specification, this is also referred to as the Data Node. 
 ##### LTP Archive
 A Long-term Preservation Archive where datasets/digital objects can be preserved and archived.
-The archive must provide a deposit endpoint. Depending on your system, this can either be internal or external. For example a REST API or SWORD enpoint.
+The archive must provide a deposit endpoint. Depending on your system, this can either be internal or external. For example a REST API or SWORD endpoint.
 ##### Archival Bot
 Middleware server that takes care of the LDN+AS2 notifications communication between the **Web repository** and the **LTP Archive**.    
 It must support Signposting and have an LDN inbox.  
 This middleware component can be implemented in several ways, depending on your architecture. It might be part of the LTP Archive application itself (built-in) or as a plug-in (internal). It may also run as a micro-service that interacts with the Archive (external).  
 The external variant can also be extended with 'rule engine' functionality. Depending on certain business rules, it can send the archival deposit to different endpoints in the required format.
-In the Event Notifications in Value-Adding Networks specification, this is also refered to as the Servive Node. 
+In the Event Notifications in Value-Adding Networks specification, this is also referred to as the Service Node. 
 
 ### High level Architecture Overview
 The schema below displays the components of the preservation service and how they relate and interact with each other. The notation used is not a formal one and is intended to be self-explanatory.
@@ -120,10 +120,10 @@ The [activitystreams context file](https://www.w3.org/ns/activitystreams){target
 
 1. The <b>Author</b> logs in into the landingpage of the dataset that it owns on the **Web Repository** (authorized user).
 2. The authorized <b>Author</b> presses an archival-button, to start a Long Term Preservation (LTP) request for this dataset on the landingpage.
-3. The **Web Repository** (Data Node) sends a Linked Data Notification (LDN) Offer `as:Offer` to the LDN inbox `ldp:inbox` of the **Archival Bot** (Service Node). The payload MUST hold the landingpage URL `sorg:AboutPage` of the scholary object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a `ietf:cite-as` relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).
+3. The **Web Repository** (Data Node) sends a Linked Data Notification (LDN) Offer `as:Offer` to the LDN inbox `ldp:inbox` of the **Archival Bot** (Service Node). The payload MUST hold the landingpage URL `sorg:AboutPage` of the scholarly object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a `ietf:cite-as` relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).
 
 #### *as:Offer (3)*:  
-In this example, the request for an LTP archival request is initated by the authorized author, 'Some Author' (identified in the payload as the actor). The origin identifies the system that sends the message on behalf of the actor.  
+In this example, the request for an LTP archival request is initiated by the authorized author, 'Some Author' (identified in the payload as the actor). The origin identifies the system that sends the message on behalf of the actor.  
 From the Event Notifications specification it is mandatory to supply at least one AS2 core type, which is `as:Document`.
 
 | Requirements | Properties                              |
@@ -170,9 +170,9 @@ From the Event Notifications specification it is mandatory to supply at least on
 ```
 
 <ol start="4">
-	<li>The <b>Web Repository</b> flags the status on the landingpage of the scholary object/dataset to &quot;LTP Request Pending&quot;.   
+	<li>The <b>Web Repository</b> flags the status on the landingpage of the scholarly object/dataset to &quot;LTP Request Pending&quot;.   
 	<li>Option: The <b>Author</b> cancels the LTP request, by pressing the "Cancel LTP" button on the landing page.
-	<li>Option: In response to action (5), the <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo<code>as:Undo</code> to the LDN inbox<code>ldp:inbox</code>of the <b>Archival Bot</b> (Service Node).
+	<li>Option: In response to action (5), the <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo <code>as:Undo</code> to the LDN inbox <code>ldp:inbox</code> of the <b>Archival Bot</b> (Service Node).
 	<li>Option: In response to action (5), the <b>Web Repository</b> cleares the LTP status/flag on the landingpage, on behalf of the <b>Author</b>.
 </ol>
 
@@ -244,9 +244,9 @@ In this payload, the as:object holds the original as:Offer message that needs to
 ```
 
 <ol start="8">
-	<li>The <code>as:Offer</code>in the LDN<code>ldp:inbox</code>of the <b>LTP Data Archive</b> is picked up by the <b>Archival Bot</b>  
-	<li>The <b>Archival Bot</b> checks the validity of the <code>as:Offer</code>. It checks against known rules, like registered domain, RDF format/SHACL validation, etc. It will either accept (10) or reject (19) the<code>as:Offer</code>   
-	<li>The <b>Archival Bot</b> sends an<code>as:Accept</code>notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b>.
+	<li>The <code>as:Offer</code> in the LDN <code>ldp:inbox</code> of the <b>LTP Data Archive</b> is picked up by the <b>Archival Bot</b>  
+	<li>The <b>Archival Bot</b> checks the validity of the <code>as:Offer</code>. It checks against known rules, like registered domain, RDF format/SHACL validation, etc. It will either accept (10) or reject (19) the <code>as:Offer</code>   
+	<li>The <b>Archival Bot</b> sends an <code>as:Accept</code>notification to the LDN <code>ldp:inbox</code>of the <b>Web Repository</b>.
 </ol>  
 
 #### *as:Accept (10)*:
@@ -318,15 +318,15 @@ This payload, the as:object holds the original as:Offer message that is accepted
 	<li>The <b>Web Repository</b> updates the status of the landingpage from &quot;Request Pending&quot; to &quot;Long Term Archiving in progress&quot;.    
 	<li>The <b>Archival Bot</b> will retrieve the Link Set URL from the <b>Web Repository</b> landing page, by either HTTP header or HTML <head> of the landingpage URL, as is described by [Signposting]{target="_blank"}.  
 	<li>The Link Set location is returned by the <b>Web Repository</b>.  
-	<li>The <b>Archival Bot</b> retrieves the seriailized Link Set from the <b>Web Repository</b>.  
+	<li>The <b>Archival Bot</b> retrieves the serialized Link Set from the <b>Web Repository</b>.  
 	<li>The <b>Archival Bot</b> retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.    
 	<li>The <b>Archival Bot</b> prepares and deposits all content resources to the the <b>LTP Data Archive</b> deposit endpoint.  
-	<li><b>Archival Bot</b> sends an <code>as:Announce</code> notification to the LDN<code>ldp:inbox</code>of the <b>Web Repository</b> to inform about the creation of the archive artifact.
+	<li><b>Archival Bot</b> sends an <code>as:Announce </code> notification to the LDN <code>ldp:inbox</code> of the <b>Web Repository</b> to inform about the creation of the archive artifact.
 </ol>
 
 #### *as:Announce (17)*:
 
-In this payload, the as:object announces the creation of the archived artefact, by indicating a ["memento"](https://www.iana.org/assignments/link-relations/link-relations.xhtml){target=_blank} link relation between the landingpage and the archived artefact.
+In this payload, the `as:object` announces the creation of the archived artefact, by indicating a ["memento"](https://www.iana.org/assignments/link-relations/link-relations.xhtml){target=_blank} link relation between the landingpage and the archived artefact.
 
 | Requirements | Properties                                               |
 |:-------------|:---------------------------------------------------------|
@@ -374,7 +374,7 @@ In this payload, the as:object announces the creation of the archived artefact, 
 
 #### *as:Reject (19)*:
 
-This payload, the as:object holds the original as:Offer message that is rejected by the Archival Bot and has a reference to the URI of the initial request (as:inReplyTo)
+This payload, the `as:object` holds the original `as:Offer` message that is rejected by the Archival Bot and has a reference to the URI of the initial request (`as:inReplyTo`)
 
 | Requirements | Properties                              |
 |:-------------|:----------------------------------------|
@@ -435,7 +435,7 @@ This payload, the as:object holds the original as:Offer message that is rejected
 }
 ```
 <ol start="20">
-	<li>The <b>Web Repository</b> cleares the LTP status on the landingpage, because the <code>as:Offer</code> was not accepted by the <b>Archival Bot</b> because the business rules in (9) where not met.  
+	<li>The <b>Web Repository</b> cleares the LTP status on the landingpage, because the <code>as:Offer</code> was not accepted by the <b>Archival Bot</b> because the business rules in (9) were not met.  
 </ol>
 
 Acknowledgements
@@ -443,7 +443,7 @@ Acknowledgements
 
 !!! info "Aligned Projects"
 
-    [Event Notifications in Value-Adding Networks]{target=_blank} (including feedback on this docucument)<br />
+    [Event Notifications in Value-Adding Networks]{target=_blank} (including feedback on this specification)<br />
     [COAR Notify Protocol](https://notify.coar-repositories.org/){target=_blank}
 
 !!! info "Data Infrastructure Capacities for EOSC"
