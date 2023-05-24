@@ -94,7 +94,7 @@ The external variant can also be extended with 'rule engine' functionality. Depe
 In the Event Notifications in Value-Adding Networks specification, this is also referred to as the Service Node. 
 
 ### High level Architecture Overview
-The schema below displays the components of the preservation service and how they relate and interact with each other. The notation used is not a formal one and is intended to be self-explanatory.
+The diagram below displays the components of the preservation service and how they relate and interact with each other. The notation used is not a formal one and is intended to be self-explanatory.
 ![Overview](architecture-overview.jpg)
 
 1. An LTP request will be sent from a **Web Repository** landing page to the **Archival Bot**’s inbox, conveying the URL of the landing page of the dataset.
@@ -327,7 +327,7 @@ This payload, the `as:object` holds the original `as:Offer` message that is acce
 
 #### *as:Announce (19)*:
 
-In this payload, the `as:object` announces the creation of the archived artefact, by indicating a ["memento"](https://www.iana.org/assignments/link-relations/link-relations.xhtml){target=_blank} link relation between the landing page and the archived artefact.
+In this payload, the `as:object` announces the creation of the archived artefact, by indicating a ["memento"](https://www.iana.org/assignments/link-relations/link-relations.xhtml){target=_blank} link relation between the landing page and the archived artefact and its URI.
 
 | Requirements | Properties                                               |
 |:-------------|:---------------------------------------------------------|
@@ -357,7 +357,7 @@ In this payload, the `as:object` announces the creation of the archived artefact
         "type": "Relationship",
         "subject": "https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1",
         "relationship": "http://www.iana.org/assignments/relation/memento",
-        "object": "https://dans.knaw.nl/dd-vault-catalog/catalognumber123456"
+        "object": "https://www.persistent-identifier.nl/urn:nbn:nl:ui:13-wk-epni"
     },
     "target": {
         "id": "https://b2share.eudat.eu",
