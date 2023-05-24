@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="description" content="None" />
+      <link rel="shortcut icon" href="img/favicon.ico" />
+    <title>Digital Preservation Service</title>
+    <link rel="stylesheet" href="css/theme.css" />
+    <link rel="stylesheet" href="css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Notification Driven Archiving";
+        var mkdocs_page_input_path = "index.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/languages/json.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href="." class="icon icon-home"> Digital Preservation Service
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href=".">Notification Driven Archiving</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#introduction">Introduction</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-digital-preservation-service">The Digital Preservation Service</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#use-cases">Use cases</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#1-single-record-archiving">1. Single record archiving</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2-auto-archive-community-records">2. (Auto) Archive Community records</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#technical-motivation">Technical motivation</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#asynchronous">Asynchronous</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#lightweight">Lightweight</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#multi-purpose">Multi-purpose</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#open-web-standards">Open Web Standards</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#open-web-standards_1">Open Web Standards</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#linked-data-notification">Linked Data Notification</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#activity-streams-20">Activity Streams 2.0</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#signposting">Signposting</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#namespaces-used">Namespaces used</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#dps-architecture">DPS Architecture</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#main-components">Main components</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#web-repository">Web Repository</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ltp-archive">LTP Archive</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#archival-bot">Archival Bot</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#high-level-architecture-overview">High level Architecture Overview</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sequence-diagram-use-case-1">Sequence Diagram Use Case #1</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ldnas2-notification-payloads">LDN+AS2 notification payloads</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#asoffer-3">as:Offer (3):</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#asundo-6">as:Undo (6):</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#asaccept-10">as:Accept (10):</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#asannounce-19">as:Announce (19):</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#asreject-21">as:Reject (21):</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#acknowledgements">Acknowledgements</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href=".">Digital Preservation Service</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Notification Driven Archiving</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/Dans-labs/ddps-docs/issues/edit/master/docs/index.md">Edit on Digital Preservation Service</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="digital-preservation-service-dps">Digital Preservation Service (DPS)<a class="headerlink" href="#digital-preservation-service-dps" title="Permanent link">&para;</a></h1>
+<div class="admonition note">
+<p class="admonition-title">Living Document (WIP), 16 May 2023</p>
+<p>This work is carried out in the context of the <a href="https://www.dice-eosc.eu/" target="_blank">DICE project</a> (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207. <br />
+It is developed by Task 4.3: "Long Term Preservation", as part of the working package 4 (WP4): "Integration with other services &amp; platforms", and published in the joint WP4 Deliverable: "D4.3 Final integration with other services &amp; platforms".</p>
+</div>
+<p><strong>This version:</strong><br />
+<a href="https://dans-labs.github.io/ddps-docs/">https://dans-labs.github.io/ddps-docs/</a> </p>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Within the DICE project, task 4.3 created a Long Term Preservation (LTP) template and accompanying guidance that data services and repositories can use to formulate their own LTP policy.
+The LTP policy should clarify to the users what is or can be guaranteed by the service, for how long and by whom.
+The policy template contains articles that distinguish between outsourced services and services hosted in-house.<br />
+This file documents the functional requirements and technical specifications for a service that implements such an LTP policy in which the archive is outsourced; the Digital Preservation Service (DPS).<br />
+It is meant as a guide on how to implement an example long-term preservation Service between a short to midterm data (web)repository service and a long-term preservation (LTP) archive.<br />
+The implementation adheres to documented community conventions for the use of <a href="https://www.w3.org/TR/ldn/" target="_blank">W3C Linked Data Notifications</a> (LDN) and <a href="https://www.w3.org/TR/activitystreams-core/" target="_blank">Activity Streams 2</a> (AS2) to integrate repository systems with long-term (LTP) archives, in a distributed, resilient and web-native architecture.<br />
+The standards used, and the application profile documented here, are implementations of the generic patterns described by <a href="https://www.eventnotifications.net/" target="_blank">Event Notifications in Value-Adding Networks</a>, that details a profile for using Linked Data Notifications with ActivityStreams2 payloads in value-adding networks.  </p>
+<h2 id="the-digital-preservation-service">The Digital Preservation Service<a class="headerlink" href="#the-digital-preservation-service" title="Permanent link">&para;</a></h2>
+<h2 id="use-cases">Use cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="1-single-record-archiving">1. Single record archiving<a class="headerlink" href="#1-single-record-archiving" title="Permanent link">&para;</a></h3>
+<p>A single dataset will be transferred to a LTP-Archive on demand, according to the repository LTP Policy, by an authenticated repository dataset owner.</p>
+<h3 id="2-auto-archive-community-records">2. (Auto) Archive Community records<a class="headerlink" href="#2-auto-archive-community-records" title="Permanent link">&para;</a></h3>
+<p>All records within a repository community could be auto-archived, according to a community archival agreement.<br />
+Opt-out/in option could be offered to the dataset owner.<br />
+This use case is a variant of use case 1 and is not worked out in this document, but it could easily be derived from the previous use case.</p>
+<h2 id="technical-motivation">Technical motivation<a class="headerlink" href="#technical-motivation" title="Permanent link">&para;</a></h2>
+<h6 id="asynchronous">Asynchronous<a class="headerlink" href="#asynchronous" title="Permanent link">&para;</a></h6>
+<p>The intended communication style among Nodes is point-to-point, requiring no centralized hubs.
+Interactions among Nodes (Service Nodes and Data Nodes) are necessarily asynchronous because certain notification patterns do not require a response ("fire and forget") and, in patterns that do, such as requesting an action, the time between a request and the announcement of the Action Result is unpredictable, as the recipient may complete tasks at its own pace.
+Pushing any data at any moment to an archive might cause resource problems at the server side.
+Therefore, it is push-oriented, with only the relevant Nodes being updated about new information as it becomes available.</p>
+<h6 id="lightweight">Lightweight<a class="headerlink" href="#lightweight" title="Permanent link">&para;</a></h6>
+<p>This proposal is lightweight. It does take relatively little compute resources to implement, both from the client as from the server side.</p>
+<h6 id="multi-purpose">Multi-purpose<a class="headerlink" href="#multi-purpose" title="Permanent link">&para;</a></h6>
+<p>The LDN+AS2 notifications approach can also be used for other purposes with the same investment. For example the peer reviewing service <a href="https://notify.coar-repositories.org/" target="_blank">COAR Notify</a>, which is also strongly aligned with the <a href="https://www.eventnotifications.net/" target="_blank">Event Notifications in Value-Adding Networks</a> Profile.</p>
+<h6 id="open-web-standards">Open Web Standards<a class="headerlink" href="#open-web-standards" title="Permanent link">&para;</a></h6>
+<p>This specification is built using Open Web Standards only. Because of its obvious benefits like larger audience and community, forward compatibility with browsers and cost savings; no patents or licensing. </p>
+<h2 id="open-web-standards_1">Open Web Standards<a class="headerlink" href="#open-web-standards_1" title="Permanent link">&para;</a></h2>
+<p>Below is a list of the open web standards that will be used for the core implementation of the Digital Preservation Service.</p>
+<h4 id="linked-data-notification">Linked Data Notification<a class="headerlink" href="#linked-data-notification" title="Permanent link">&para;</a></h4>
+<p>W3C <a href="https://www.w3.org/TR/ldn/" target="_blank">Linked Data Notification</a> (LDN) is an HTTP-based notification (push) protocol. It will be used for repository/archive communication. </p>
+<h4 id="activity-streams-20">Activity Streams 2.0<a class="headerlink" href="#activity-streams-20" title="Permanent link">&para;</a></h4>
+<p>W3C <a href="https://www.w3.org/TR/activitystreams-core/" target="_blank">Activity Streams 2</a> (AS2) provides a foundational vocabulary for messaging about activities that involve web resources. A message profile will be used for LDN notifications payload exchanged by repositories and archives.<br />
+Within this documentation, the Linked Data Notifications (LDN) with ActivityStreams2 (AS2) payloads will be referred to as: 'LDN+AS2 notifications'.<br />
+The notification payloads should use JSON-LD as default syntax, but other RDF syntaxes may be used.</p>
+<h4 id="signposting">Signposting<a class="headerlink" href="#signposting" title="Permanent link">&para;</a></h4>
+<p><a href="https://www.signposting.org/" target="_blank">Signposting</a> is a REST/HATEOAS “follow your nose” (navigational) approach to make the scholarly web more friendly to machines; it leverages IETF RFCs and IANA-registered link relation types. Typed links (HTTP Link header and/or HTML <link>) are used to allow machines to uniformly navigate scholarly artefacts irrespective of the repository they reside in. The <a href="https://signposting.org/FAIR/" target="_blank">FAIR Signposting Profile</a> is a lightweight, yet powerful approach to increase the FAIRness of scholarly objects. It will be used by repositories as a means to allow archives to determine which web resources need to be retrieved in response to an on-demand archiving request.</p>
+<h2 id="namespaces-used">Namespaces used<a class="headerlink" href="#namespaces-used" title="Permanent link">&para;</a></h2>
+<p>Within this document, the following namespace prefix bindings are used:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Prefix</th>
+<th align="left">Namespace</th>
+<th align="left">Name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>as</code></td>
+<td align="left">https://www.w3.org/ns/activitystreams#</td>
+<td align="left">W3C ActivityStreams 2.0</td>
+</tr>
+<tr>
+<td align="left"><code>ldp</code></td>
+<td align="left">http://www.w3.org/ns/ldp#</td>
+<td align="left">W3C Linked Data Platform (LDP) Vocabulary</td>
+</tr>
+<tr>
+<td align="left"><code>sorg</code></td>
+<td align="left">https://schema.org/</td>
+<td align="left">Schema.org</td>
+</tr>
+<tr>
+<td align="left"><code>ietf</code></td>
+<td align="left">http://www.iana.org/assignments/relation/</td>
+<td align="left">The Internet Engineering Task Force (IETF)</td>
+</tr>
+</tbody>
+</table>
+<p>In our example LDN+AS2 notifications we use JSON-LD as syntax, in which we don’t explicitly write the prefixes.  </p>
+<h2 id="dps-architecture">DPS Architecture<a class="headerlink" href="#dps-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="main-components">Main components<a class="headerlink" href="#main-components" title="Permanent link">&para;</a></h3>
+<h5 id="web-repository">Web Repository<a class="headerlink" href="#web-repository" title="Permanent link">&para;</a></h5>
+<p>This is the short- to midterm repository system. In the DPS this repository system is used for depositing, storing and disseminating datasets / digital objects.<br />
+The <strong>Web Repository</strong> must support Signposting and have an LDN inbox for handling LDN+AS2 notifications. <br />
+In the Event Notifications in Value-Adding Networks specification, this is also referred to as the Data Node. </p>
+<h5 id="ltp-archive">LTP Archive<a class="headerlink" href="#ltp-archive" title="Permanent link">&para;</a></h5>
+<p>A Long-term Preservation Archive where datasets/digital objects can be preserved and archived.
+The archive must provide a deposit endpoint. Depending on your system, this can either be internal or external. For example a REST API or SWORD endpoint.</p>
+<h5 id="archival-bot">Archival Bot<a class="headerlink" href="#archival-bot" title="Permanent link">&para;</a></h5>
+<p>Middleware server that takes care of the LDN+AS2 notifications communication between the <strong>Web repository</strong> and the <strong>LTP Archive</strong>.  <br />
+It must support Signposting and have an LDN inbox.<br />
+This middleware component can be implemented in several ways, depending on your architecture. It might be part of the LTP Archive application itself (built-in) or as a plug-in (internal). It may also run as a micro-service that interacts with the Archive (external).<br />
+The external variant can also be extended with 'rule engine' functionality. Depending on certain business rules, it can send the archival deposit to different endpoints in the required format.
+In the Event Notifications in Value-Adding Networks specification, this is also referred to as the Service Node. </p>
+<h3 id="high-level-architecture-overview">High level Architecture Overview<a class="headerlink" href="#high-level-architecture-overview" title="Permanent link">&para;</a></h3>
+<p>The diagram below displays the components of the preservation service and how they relate and interact with each other. The notation used is not a formal one and is intended to be self-explanatory.
+<img alt="Overview" src="architecture-overview.jpg" /></p>
+<ol>
+<li>An LTP request will be sent from a <strong>Web Repository</strong> landing page to the <strong>Archival Bot</strong>’s inbox, conveying the URL of the landing page of the dataset.</li>
+<li>The <strong>Archival Bot</strong> will poll the LDN Inbox for such requests.</li>
+<li>The <strong>Archival Bot</strong> visits the landing page URL, discovers a Link Set provided via Signposting, and retrieves it.</li>
+<li>The <strong>Archival Bot</strong> parses the Link Set to obtain URLs for object files and metadata, and then retrieves those.</li>
+<li>The <strong>Archival Bot</strong> deposits an archival package containing metadata and object files to the <strong>LTP Archive</strong>.</li>
+<li>The <strong>Archival Bot</strong> reports back on the status of the deposit.</li>
+</ol>
+<h3 id="sequence-diagram-use-case-1">Sequence Diagram Use Case #1<a class="headerlink" href="#sequence-diagram-use-case-1" title="Permanent link">&para;</a></h3>
+<p>The sequence diagram below shows the interactions involved in use case #1. The numbers in the diagram correspond to the nummers given in the description of the interactions below.
+<img alt="Activity Diagram" src="sequencediagram-0523.jpg" /></p>
+<h3 id="ldnas2-notification-payloads">LDN+AS2 notification payloads<a class="headerlink" href="#ldnas2-notification-payloads" title="Permanent link">&para;</a></h3>
+<p>The LDN payloads that are involved in the sequence diagram above, have been composed of the specifications in both <a href="https://www.eventnotifications.net/" target="_blank">Event Notifications in Value-Adding Networks</a> and <a href="https://notify.coar-repositories.org/" target="_blank">COAR Notify</a>. <br />
+For a profound understanding of this application profile one should also look into these specifications.
+Prior to each example payload, the requirements of the properties used are listed in a table. The JSON-LD properties @id and @type (mapped to 'id' and 'type' in the notification by the @context property) represent the mandatory identifier for the activity and the activity type respectively.<br />
+The activity identifier (@id) is distinct from the notification identifier, which is the URI minted by the LDN Receiver when the LDN+AS2 notification that describes the activity is received in its LDN Inbox.
+Notice that all payloads include the <a href="https://notify.coar-repositories.org/schema/notify.json" target="_blank">COAR Notify context file</a> (@context). This context file defines commonly used namespaces in this profile as listed in table 1, and also includes the COAR Notify vocabulary. 
+The <a href="https://www.w3.org/ns/activitystreams" target="_blank">activitystreams context file</a> also includes namespace prefixes used in the examples.</p>
+<ol>
+<li>The <b>Author</b> logs in into the landing page of the dataset that it owns on the <strong>Web Repository</strong> (authorized user).</li>
+<li>The authorized <b>Author</b> presses an archival-button, to start a Long Term Preservation (LTP) request for this dataset on the landing page.</li>
+<li>The <strong>Web Repository</strong> (Data Node) sends a Linked Data Notification (LDN) Offer <code>as:Offer</code> to the LDN inbox <code>ldp:inbox</code> of the <strong>Archival Bot</strong> (Service Node). The payload MUST hold the landing page URL <code>sorg:AboutPage</code> of the scholarly object/dataset. This is by convention in both Event Notifications and COAR Notify. Also, providing the PID as a <code>ietf:cite-as</code> relation, together with the landing page URL is mandated by both specifications. This way all the associated resources can be found and retrieved by using FAIR Signposting discovery methods (12).</li>
+</ol>
+<h4 id="asoffer-3"><em>as:Offer (3)</em>:<a class="headerlink" href="#asoffer-3" title="Permanent link">&para;</a></h4>
+<p>In this example, the request for an LTP archival request is initiated by the authorized author, 'Some Author' (identified in the payload as the actor). The origin identifies the system that sends the message on behalf of the actor.<br />
+From the Event Notifications specification it is mandatory to supply at least one AS2 core type, which is <code>as:Document</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requirements</th>
+<th align="left">Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Required</td>
+<td align="left"><code>@id</code>, <code>@type</code>, <code>as:actor</code>, <code>as:object</code></td>
+</tr>
+<tr>
+<td align="left">Optional</td>
+<td align="left"><code>as:origin</code>, <code>as:target</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{
+    &quot;@context&quot;: [
+        &quot;https://www.w3.org/ns/activitystreams&quot;,
+        &quot;https://purl.org/coar/notify&quot;
+    ],
+    &quot;id&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+    &quot;type&quot;: &quot;Offer&quot;,
+    &quot;actor&quot;: {
+        &quot;id&quot;: &quot;https://orcid.org/0000-0003-4405-7546&quot;,
+        &quot;name&quot;: &quot;Some Author&quot;,
+        &quot;type&quot;: &quot;Person&quot;
+    },
+    &quot;origin&quot;: {
+        &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+        &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+        &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    },
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+        &quot;ietf:cite-as&quot;: &quot;https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1&quot;,
+        &quot;type&quot;: [
+            &quot;sorg:AboutPage&quot;,
+            &quot;sorg:Dataset&quot;,
+            &quot;Document&quot;
+        ]
+    },
+    &quot;target&quot;: {
+        &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+        &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+        &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    }
+}
+</code></pre>
+<ol start="4">
+    <li>The <b>Web Repository</b> flags the status on the landing page of the scholarly object/dataset to &quot;LTP Request Pending&quot;.   
+    <li>Option: The <b>Author</b> cancels the LTP request, by pressing the "Cancel LTP" button on the landing page.
+    <li>Option: In response to action (5), the <b>Web Repository</b> sends a Linked Data Notification (LDN) Undo <code>as:Undo</code> to the LDN inbox <code>ldp:inbox</code> of the <b>Archival Bot</b> (Service Node).
+    <li>Option: In response to action (5), the <b>Web Repository</b> cleares the LTP status/flag on the landing page, on behalf of the <b>Author</b>.
+</ol>
+
+<h4 id="asundo-6"><em>as:Undo (6)</em>:<a class="headerlink" href="#asundo-6" title="Permanent link">&para;</a></h4>
+<p>In this payload, the as:object holds the original as:Offer message that needs to be undone.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requirements</th>
+<th align="left">Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Required</td>
+<td align="left"><code>@id</code>, <code>@type</code>, <code>as:actor</code>, <code>as:object</code></td>
+</tr>
+<tr>
+<td align="left">Optional</td>
+<td align="left"><code>as:origin</code>, <code>as:target</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{
+    &quot;@context&quot;: [
+        &quot;https://www.w3.org/ns/activitystreams&quot;,
+        &quot;https://purl.org/coar/notify&quot;
+    ],
+    &quot;id&quot;: &quot;urn:uuid:82eaace6-3bf3-4b8b-b168-15d1a46fb668&quot;,
+    &quot;type&quot;: &quot;Undo&quot;,
+    &quot;actor&quot;: {
+        &quot;id&quot;: &quot;https://orcid.org/0000-0003-4405-7546&quot;,
+        &quot;name&quot;: &quot;Some Author&quot;,
+        &quot;type&quot;: &quot;Person&quot;
+    },
+    &quot;origin&quot;: {
+        &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+        &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+        &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    },
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+        &quot;type&quot;: &quot;Offer&quot;,
+        &quot;actor&quot;: {
+            &quot;id&quot;: &quot;https://orcid.org/0000-0003-4405-7546&quot;,
+            &quot;name&quot;: &quot;Some Author&quot;,
+            &quot;type&quot;: &quot;Person&quot;
+        },
+        &quot;origin&quot;: {
+            &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+            &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+            &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+            &quot;type&quot;: &quot;Service&quot;
+        },
+        &quot;object&quot;: {
+            &quot;id&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+            &quot;ietf:cite-as&quot;: &quot;https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1&quot;,
+            &quot;type&quot;: [
+                &quot;sorg:AboutPage&quot;,
+                &quot;sorg:Dataset&quot;,
+                &quot;Document&quot;
+            ]
+        },
+        &quot;target&quot;: {
+            &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+            &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+            &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+            &quot;type&quot;: &quot;Service&quot;
+        }
+    },
+    &quot;target&quot;: {
+        &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+        &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+        &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    }
+}
+</code></pre>
+<ol start="8">
+    <li>The <code>as:Offer</code> in the LDN <code>ldp:inbox</code> of the <b>LTP Data Archive</b> is picked up by the <b>Archival Bot</b>  
+    <li>The <b>Archival Bot</b> checks the validity of the <code>as:Offer</code>. It checks against known rules, like registered domain, RDF format/SHACL validation, etc. It will either accept (10) or reject (19) the <code>as:Offer</code>   
+    <li>The <b>Archival Bot</b> sends an <code>as:Accept</code>notification to the LDN <code>ldp:inbox</code>of the <b>Web Repository</b>.
+</ol>
+
+<h4 id="asaccept-10"><em>as:Accept (10)</em>:<a class="headerlink" href="#asaccept-10" title="Permanent link">&para;</a></h4>
+<p>This payload, the <code>as:object</code> holds the original <code>as:Offer</code> message that is accepted and has a reference to the URI of the initial request (<code>as:inReplyTo</code>)</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requirements</th>
+<th align="left">Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Required</td>
+<td align="left"><code>@id</code>, <code>@type</code>, <code>as:actor</code>, <code>as:object</code></td>
+</tr>
+<tr>
+<td align="left">Recommended</td>
+<td align="left"><code>as:context</code>, <code>as:inReplyTo</code></td>
+</tr>
+<tr>
+<td align="left">Optional</td>
+<td align="left"><code>as:origin</code>, <code>as:target</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{
+    &quot;@context&quot;: [
+        &quot;https://www.w3.org/ns/activitystreams&quot;,
+        &quot;https://purl.org/coar/notify&quot;
+    ],
+    &quot;id&quot;: &quot;urn:uuid:0cd58f07-69aa-4dd3-bc19-7b7de0f3550a&quot;,
+    &quot;type&quot;: &quot;Accept&quot;,
+    &quot;actor&quot;: {
+        &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+        &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+        &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    },
+    &quot;inReplyTo&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+    &quot;context&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+        &quot;type&quot;: &quot;Offer&quot;,
+        &quot;actor&quot;: {
+            &quot;id&quot;: &quot;https://orcid.org/0000-0003-4405-7546&quot;,
+            &quot;name&quot;: &quot;Some Author&quot;,
+            &quot;type&quot;: &quot;Person&quot;
+        },
+        &quot;origin&quot;: {
+            &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+            &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+            &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+            &quot;type&quot;: &quot;Service&quot;
+        },
+        &quot;object&quot;: {
+            &quot;id&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+            &quot;ietf:cite-as&quot;: &quot;https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1&quot;,
+            &quot;type&quot;: [
+                &quot;sorg:AboutPage&quot;,
+                &quot;sorg:Dataset&quot;,
+                &quot;Document&quot;
+            ]
+        },
+        &quot;target&quot;: {
+            &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+            &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+            &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+            &quot;type&quot;: &quot;Service&quot;
+        }
+    },
+    &quot;target&quot;: {
+        &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+        &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+        &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    }
+}
+</code></pre>
+<ol start="11">
+    <li>The <b>Web Repository</b> updates the status of the landing page from &quot;Request Pending&quot; to &quot;Long Term Archiving in progress&quot;.    
+    <li>The <b>Archival Bot</b> will retrieve the Link Set URL from the <b>Web Repository</b> landing page, by either HTTP header or HTML <head> of the landing page URL, as is described by Signposting.  
+    <li>The Link Set location is returned by the <b>Web Repository</b>.  
+    <li>The <b>Archival Bot</b> retrieves the serialized Link Set from the <b>Web Repository</b>.  
+    <li>The <b>Archival Bot</b> retrieves the content resources from the <b>Web Repository</b> that are listed in the Link Set.
+    <li>The <b>Archival Bot</b> creates the archival package with all content resources.
+    <li>The <b>Archival Bot</b> deposits the archival package to the <b>LTP Data Archive</b> deposit endpoint.  
+    <li>The <b>LTP Data Archive</b> responds with the Archive URL to the <b>Archival Bot</b>.
+    <li><b>Archival Bot</b> sends an <code>as:Announce </code> notification to the LDN <code>ldp:inbox</code> of the <b>Web Repository</b> to inform about the creation of the archive artifact.
+</ol>
+
+<h4 id="asannounce-19"><em>as:Announce (19)</em>:<a class="headerlink" href="#asannounce-19" title="Permanent link">&para;</a></h4>
+<p>In this payload, the <code>as:object</code> announces the creation of the archived artefact, by indicating a <a href="https://www.iana.org/assignments/link-relations/link-relations.xhtml" target="_blank">"memento"</a> link relation between the landing page and the archived artefact and its URI.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requirements</th>
+<th align="left">Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Required</td>
+<td align="left"><code>@id</code>, <code>@type</code>, <code>as:actor</code>, <code>as:object</code>, <code>as:inReplyTo</code></td>
+</tr>
+<tr>
+<td align="left">Recommended</td>
+<td align="left"><code>as:context</code></td>
+</tr>
+<tr>
+<td align="left">Optional</td>
+<td align="left"><code>as:origin</code>, <code>as:target</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{
+    &quot;@context&quot;: [
+        &quot;https://www.w3.org/ns/activitystreams&quot;,
+        &quot;https://purl.org/coar/notify&quot;
+    ],
+    &quot;id&quot;: &quot;urn:uuid:4a6b8761-3365-4379-a2cf-1fb012f1c2d8&quot;,
+    &quot;type&quot;: &quot;Announce&quot;,
+    &quot;actor&quot;: {
+        &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+        &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+        &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    },
+    &quot;inReplyTo&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+    &quot;context&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:CF21A499-1BDD-4B59-984A-FC94CF6FBA86&quot;,
+        &quot;type&quot;: &quot;Relationship&quot;,
+        &quot;subject&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+        &quot;relationship&quot;: &quot;http://www.iana.org/assignments/relation/memento&quot;,
+        &quot;object&quot;: &quot;https://www.persistent-identifier.nl/urn:nbn:nl:ui:13-wk-epni&quot;
+    },
+    &quot;target&quot;: {
+        &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+        &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+        &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    }
+}
+</code></pre>
+<ol start="20">
+    <li>The <b>Web Repository</b> updates the status of the landing page from 'Long Term Archiving in progress' to 'Long Term Archived', including a link to the archived artefact.    
+    <li><b>Archival Bot</b> sends an <code>as:Reject</code> notification to the LDN <code>ldp:inbox</code> of the <b>Web Repository</b>.  
+</ol>
+
+<h4 id="asreject-21"><em>as:Reject (21)</em>:<a class="headerlink" href="#asreject-21" title="Permanent link">&para;</a></h4>
+<p>This payload, the <code>as:object</code> holds the original <code>as:Offer</code> message that is rejected by the Archival Bot and has a reference to the URI of the initial request (<code>as:inReplyTo</code>)</p>
+<table>
+<thead>
+<tr>
+<th align="left">Requirements</th>
+<th align="left">Properties</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Required</td>
+<td align="left"><code>@id</code>, <code>@type</code>, <code>as:actor</code>, <code>as:object</code></td>
+</tr>
+<tr>
+<td align="left">Recommended</td>
+<td align="left"><code>as:context</code>, <code>as:inReplyTo</code></td>
+</tr>
+<tr>
+<td align="left">Optional</td>
+<td align="left"><code>as:origin</code>, <code>as:target</code></td>
+</tr>
+</tbody>
+</table>
+<pre><code class="language-json">{
+    &quot;@context&quot;: [
+        &quot;https://www.w3.org/ns/activitystreams&quot;,
+        &quot;https://purl.org/coar/notify&quot;
+    ],
+    &quot;id&quot;: &quot;urn:uuid:2a74a606-42c8-4e26-88b9-0f14e7b79d82&quot;,
+    &quot;type&quot;: &quot;Reject&quot;,
+    &quot;actor&quot;: {
+        &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+        &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+        &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+    },
+    &quot;inReplyTo&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+    &quot;context&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+    &quot;object&quot;: {
+        &quot;id&quot;: &quot;urn:uuid:78a30582-ef0f-11ed-a05b-0242ac120003&quot;,
+        &quot;type&quot;: &quot;Offer&quot;,
+        &quot;actor&quot;: {
+            &quot;id&quot;: &quot;https://orcid.org/0000-0003-4405-7546&quot;,
+            &quot;name&quot;: &quot;Some Author&quot;,
+            &quot;type&quot;: &quot;Person&quot;
+        },
+        &quot;origin&quot;: {
+            &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+            &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+            &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+            &quot;type&quot;: &quot;Service&quot;
+        },
+        &quot;object&quot;: {
+            &quot;id&quot;: &quot;https://b2share.eudat.eu/records/1c42a67a73e9424b8192ba65c81077e1&quot;,
+            &quot;ietf:cite-as&quot;: &quot;https://doi.org/10.23728/b2share.1c42a67a73e9424b8192ba65c81077e1&quot;,
+            &quot;type&quot;: [
+                &quot;sorg:AboutPage&quot;,
+                &quot;sorg:Dataset&quot;,
+                &quot;Document&quot;
+            ]
+        },
+        &quot;target&quot;: {
+            &quot;id&quot;: &quot;https://archivalbot.data-stations.nl/&quot;,
+            &quot;inbox&quot;: &quot;https://archivalbot.data-stations.nl/inbox/&quot;,
+            &quot;name&quot;: &quot;DANS Archival Bot&quot;,
+            &quot;type&quot;: &quot;Service&quot;
+        }
+    },
+        &quot;id&quot;: &quot;https://b2share.eudat.eu&quot;,
+        &quot;name&quot;: &quot;EUDAT B2SHARE Web Repository&quot;,
+        &quot;inbox&quot;: &quot;https://b2share.eudat.eu/inbox/&quot;,
+        &quot;type&quot;: &quot;Service&quot;
+}
+</code></pre>
+<ol start="22">
+    <li>The <b>Web Repository</b> cleares the LTP status on the landing page, because the <code>as:Offer</code> was not accepted by the <b>Archival Bot</b> because the business rules in (9) were not met.  
+</ol>
+
+<h2 id="acknowledgements">Acknowledgements<a class="headerlink" href="#acknowledgements" title="Permanent link">&para;</a></h2>
+<div class="admonition info">
+<p class="admonition-title">Aligned Projects</p>
+<p><a href="https://www.eventnotifications.net/" target="_blank">Event Notifications in Value-Adding Networks</a> (including feedback on this specification)<br />
+<a href="https://notify.coar-repositories.org/" target="_blank">COAR Notify Protocol</a></p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Data Infrastructure Capacities for EOSC</p>
+<p>The specifications for long-term-archiving notifications is carried out in the context of the <a href="https://www.dice-eosc.eu/" target="_blank">DICE project</a> (Data Infrastructure Capacities for EOSC), funded by the EU's Horizon 2020 project call H2020-INFRAEOSC-2018-2020 under Grant Agreement no. 101017207.<br />
+It is developed by Task 4.3: "Long Term Preservation", as part of the working package 4 (WP4): "Integration with other services &amp; platforms", and published in the joint WP4 Deliverable: "D4.3 Final integration with other services &amp; platforms".</p>
+</div>
+              
+            </div>
+          </div><footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+    
+  </span>
+</div>
+    <script>var base_url = '.';</script>
+    <script src="js/theme_extra.js" defer></script>
+    <script src="js/theme.js" defer></script>
+      <script src="search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
+
+<!--
+MkDocs version : 1.4.2
+Build Date UTC : 2023-05-24 13:40:56.313159+00:00
+-->
